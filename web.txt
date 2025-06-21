@@ -1,0 +1,7 @@
+ssh root@188.40.171.187
+6X0pk3ru
+cd /home/shawatidevtqnia/public_html
+
+
+
+

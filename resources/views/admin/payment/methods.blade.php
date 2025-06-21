@@ -1,0 +1,228 @@
+@extends('admin.app')
+@section('title',__('messages.Payment_methods'))
+@section('content')
+<div class="d-flex flex-column flex-column-fluid">
+
+
+	<div class="container">
+
+		@if(session('success'))
+		<div class="alert alert-success alert-dismissible fade show " role="alert">
+			{{session('success')}}
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		@endif
+		@if($errors->any())
+		@foreach($errors->all() as $error)
+
+		<div class="alert alert-danger alert-dismissible fade show " role="alert">
+			{{ $error }}
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		@endforeach
+		@endif
+
+	</div>
+	<!--begin::Toolbar-->
+	<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+		<!--begin::Toolbar container-->
+		<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+			<!--begin::Page title-->
+			<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+				<!--begin::Title-->
+				<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">{{__('messages.Payment_methods')}}</h1>
+				<!--end::Title-->
+				<!--begin::Breadcrumb-->
+				<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+					<!--begin::Item-->
+					<li class="breadcrumb-item text-muted">
+						<a class="text-muted text-hover-primary">{{__('messages.Payment')}}</a>
+					</li>
+					<!--end::Item-->
+					<!--begin::Item-->
+					<li class="breadcrumb-item">
+						<span class="bullet bg-gray-400 w-5px h-2px"></span>
+					</li>
+					<!--end::Item-->
+					<!--begin::Item-->
+					<li class="breadcrumb-item text-muted">{{__('messages.Payment_methods')}}</li>
+					<!--end::Item-->
+				</ul>
+				<!--end::Breadcrumb-->
+			</div>
+			<!--end::Page title-->
+			<!--begin::Actions-->
+			<div class="d-flex align-items-center gap-2 gap-lg-3">
+				@can('add payment method')
+				<button class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#add">{{__('messages.Create')}}</button>
+				@endcan
+			</div>
+			<!--end::Actions-->
+		</div>
+		<!--end::Toolbar container-->
+	</div>
+	<!--end::Toolbar-->
+	<!--begin::Content-->
+	<div id="kt_app_content" class="app-content flex-column-fluid">
+		<!--begin::Content container-->
+		<div id="kt_app_content_container" class="app-container container-xxl">
+			<!--begin::About card-->
+			<div class="card">
+				<!--begin::Body-->
+				<div class="card-body p-lg-17">
+					<table class="table align-middle gs-0 gy-4">
+						<!--begin::Table head-->
+						<thead>
+							<tr class="fw-bold text-muted bg-light">
+								<th class="ps-4 min-w-100px rounded-start">{{__('messages.Image')}}</th>
+								<th class="ps-4 min-w-100px rounded-start">{{__('messages.Name')}}</th>
+								<th class="ps-4 min-w-100px rounded-start">{{__('messages.Account_num')}}</th>
+								<th class="min-w-125px">{{__('messages.Status')}}</th>
+								<th class="min-w-125px">{{__('messages.Actions')}}</th>
+
+							</tr>
+						</thead>
+
+						<tbody>
+							@foreach($methods as $method)
+							<tr>
+								<td><img src="/{{$method->image}}" style="height: 60px;" alt=""></td>
+								<td>{{ session('lang')=='en'? $method->name : $method->name_ar}}</td>
+								<td>{{$method->account}}</td>
+								<td>
+									@if($method->status == 1)
+									<span class="badge badge-light-success">{{__('messages.Active')}}</span>
+									@else
+									<span class="badge badge-light-danger">{{__('messages.Disable')}}</span>
+									@endif
+								</td>
+								<td class="text-center">
+									@can('change payment method status')
+									<a href="{{route('admin.change_payment_method_status',$method->id)}}" class=" btn btn-bg-primary btn-color-muted btn-active-color-primary btn-sm px-4" style="color:white">{{__('messages.Change_status')}}</a>
+									@endcan
+									@can('edit payment method')
+									<button onclick="setData('{{$method->id}}','{{$method->image}}','{{$method->name}}','{{$method->name_ar}}','{{$method->account}}')" data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4">{{__('messages.Edit')}}</button>
+									@endcan
+								</td>
+
+							</tr>
+							@endforeach
+						</tbody>
+						<!--end::Table body-->
+					</table>
+
+
+				</div>
+				<!--end::Body-->
+			</div>
+			<!--end::About card-->
+		</div>
+		<!--end::Content container-->
+	</div>
+</div>
+<!--end::Content-->
+
+
+<!-- modals -->
+
+<!-- add -->
+<div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">{{__('messages.add_new_method')}}</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form enctype="multipart/form-data" action="{{route('admin.add_method')}}" method="post">
+					@csrf
+					<div class="row">
+						<div class="col">
+							<input required name="name_en" type="text" class="form-control" placeholder="{{__('messages.Name_en')}}" aria-label="First name">
+						</div>
+						<div class="col">
+							<input required name="name_ar" type="text" class="form-control" placeholder="{{__('messages.Name_ar')}}" aria-label="Last name">
+						</div>
+
+					</div>
+					<div class="row my-2">
+						<div class="col">
+							<input required name="account" type="text" class="form-control " placeholder="{{__('messages.Account_num')}}" aria-label="Last name">
+						</div>
+					</div>
+					<div class="row my-2">
+						<div class="col">
+							<label for="image" class="btn btn-primary">{{__("messages.Upload_image")}} *{{__("messages.Required")}}</label>
+							<input required name="image" hidden  id="image" type="file" class="form-control " placeholder="{{__('messages.Image')}}" aria-label="Last name">
+						</div>
+					</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary w-100">{{__('messages.Save_changes')}}</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- Edit -->
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">{{__('messages.edit_method')}}</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form enctype="multipart/form-data" action="{{route('admin.update_method')}}" method="post">
+					@csrf
+					<input type="text" name="id" class="method_id" hidden>
+					<div class="row">
+						<div class="col">
+							<input required name="name_en" type="text" class="form-control name_en" placeholder="{{__('messages.Name_en')}}" aria-label="First name">
+						</div>
+						<div class="col">
+							<input required name="name_ar" type="text" class="form-control name_ar" placeholder="{{__('messages.Name_ar')}}" aria-label="Last name">
+						</div>
+
+					</div>
+					<div class="row my-2">
+						<div class="col">
+							<input required name="account" type="text" class="form-control account " placeholder="{{__('messages.Account_num')}}" aria-label="Last name">
+						</div>
+					</div>
+					<div class="row my-2">
+						<img src="" class="method_image my-2" style="height: 250px;" alt="">
+						<div class="col">
+						<label for="edit-image" class="btn btn-primary">{{__("messages.Upload_image")}}</label>
+							<input name="image" hidden id="edit-image" type="file" class="form-control " placeholder="{{__('messages.Image')}}" aria-label="Last name">
+						</div>
+					</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary w-100">{{__('messages.Save_changes')}}</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+	function setData(id, image, name_en, name_ar, account) {
+		let InputImage = document.querySelector(".method_image")
+
+		let InputNameEn = document.querySelector(".name_en")
+		let InputNameAr = document.querySelector(".name_ar")
+		let InputAccount = document.querySelector(".account")
+		let InputID = document.querySelector(".method_id")
+
+		InputID.value = id
+		InputImage.src = '/' + image
+		InputNameAr.value = name_ar
+		InputNameEn.value = name_en
+		InputAccount.value = account
+	}
+</script>
+@endsection
+
+@section('js')
+@endsection

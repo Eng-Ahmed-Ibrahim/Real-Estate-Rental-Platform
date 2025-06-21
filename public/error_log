@@ -1,0 +1,579 @@
+[11-Dec-2023 15:55:26 Africa/Cairo] PHP Fatal error:  Cannot declare class App\Http\Requests\API\Provider\CreateServiceRequest, because the name is already in use in /home/rentaldevtqnia/public_html/app/Http/Requests/API/Provider/updateServiceRequest.php on line 0
+[11-Dec-2023 16:24:48 Africa/Cairo] PHP Fatal error:  Cannot declare class App\Http\Requests\API\Provider\CreateServiceRequest, because the name is already in use in /home/rentaldevtqnia/public_html/app/Http/Requests/API/Provider/updateServiceRequest.php on line 0
+[01-Jul-2024 14:16:26 Africa/Cairo] PHP Fatal error:  Cannot use App\Models\Service as Service because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/Admin/BookingController.php on line 19
+[11-Jul-2024 11:07:11 Africa/Cairo] PHP Fatal error:  Declaration of App\Exports\PropertiesDataExport::view() must be compatible with Maatwebsite\Excel\Concerns\FromView::view(): Illuminate\Contracts\View\View in /home3/ren2godevtqnia/public_html/app/Exports/PropertiesDataExport.php on line 19
+[17-Jul-2024 11:02:58 Africa/Cairo] PHP Fatal error:  Cannot use App\Models\Setting as Setting because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/Admin/ServicesController.php on line 23
+[22-Aug-2024 13:19:21 Africa/Cairo] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 29
+[22-Aug-2024 13:19:25 Africa/Cairo] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 29
+[08-Sep-2024 14:44:07 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[08-Sep-2024 15:01:02 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:05:16 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:05:19 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:05:26 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:05:45 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:05:51 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:05:51 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:05:55 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:06:30 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:06:33 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:06:54 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:08:49 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:09:38 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:13:52 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:18:55 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:25:30 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:25:38 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:25:38 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:27:40 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:30:43 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.29. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:30:52 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.29. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:31:17 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.29. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:31:19 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.29. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[09-Sep-2024 06:31:22 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.29. in /home3/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[11-Sep-2024 14:56:47 Africa/Cairo] PHP Fatal error:  A void function must not return a value in /home3/ren2godevtqnia/public_html/app/Providers/ViewServiceProvider.php on line 31
+[15-Sep-2024 14:45:10 Africa/Cairo] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home3/ren2godevtqnia/public_html/storage/framework/views/84e73435226022873184b9edfcf42d42.php on line 229
+[18-Sep-2024 11:36:56 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[18-Sep-2024 13:12:25 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[18-Sep-2024 13:12:28 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[18-Sep-2024 13:31:23 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[21-Sep-2024 12:09:51 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[22-Sep-2024 09:16:28 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 12:29:18 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 12:29:36 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 12:30:52 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 13:15:46 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 13:35:29 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 15:04:30 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 15:06:04 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 15:08:04 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 15:08:34 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 15:08:36 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 15:28:49 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 15:29:55 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 15:31:46 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[23-Sep-2024 15:32:49 Africa/Cairo] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/ren2godevtqnia/public_html/app/Http/Controllers/API/BookingsController.php on line 30
+[04-Nov-2024 11:27:08 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.30. in /home2/ren2godevtqnia/public_html/vendor/composer/platform_check.php on line 28
+[04-Nov-2024 11:27:17 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:29:14 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:29:19 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:29:53 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:33:18 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:33:20 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:33:22 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:45:20 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:48:32 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:51:33 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:52:50 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:53:49 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:54:36 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[04-Nov-2024 11:55:30 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "config" does not exist in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:912
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(912): ReflectionClass->__construct('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#14 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#15 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [config] does not exist. in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('config')
+#1 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('config', Array, true)
+#2 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('config', Array)
+#3 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('config', Array)
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1454): Illuminate\Foundation\Application->make('config')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(560): Illuminate\Container\Container->offsetGet('config')
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(611): Illuminate\Log\LogManager->getDefaultDriver()
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(124): Illuminate\Log\LogManager->parseDriver(NULL)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(681): Illuminate\Log\LogManager->driver()
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(317): Illuminate\Log\LogManager->error('Call to undefin...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(278): Illuminate\Foundation\Exceptions\Handler->reportThrowable(Object(Error))
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(497): Illuminate\Foundation\Exceptions\Handler->report(Object(Error))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->reportException(Object(Error))
+#13 /home2/ren2godevtqnia/public_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#14 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 914
+[06-Nov-2024 18:01:06 Africa/Cairo] PHP Fatal error:  Class App\Models\User contains 2 abstract methods and must therefore be declared abstract or implement the remaining methods (Tymon\JWTAuth\Contracts\JWTSubject::getJWTIdentifier, Tymon\JWTAuth\Contracts\JWTSubject::getJWTCustomClaims) in /home2/ren2godevtqnia/public_html/app/Models/User.php on line 16
+[06-Nov-2024 20:23:17 Africa/Cairo] PHP Fatal error:  Cannot declare class App\Http\Middleware\CustomAuthenticationMiddleware, because the name is already in use in /home2/ren2godevtqnia/public_html/app/Http/Middleware/CustomAuthorizationHeaderMiddleware.php on line 10
+[06-Nov-2024 20:23:47 Africa/Cairo] PHP Fatal error:  Cannot declare class App\Http\Middleware\CustomAuthenticationMiddleware, because the name is already in use in /home2/ren2godevtqnia/public_html/app/Http/Middleware/CustomAuthorizationHeaderMiddleware.php on line 10
+[06-Nov-2024 20:23:50 Africa/Cairo] PHP Fatal error:  Cannot declare class App\Http\Middleware\CustomAuthenticationMiddleware, because the name is already in use in /home2/ren2godevtqnia/public_html/app/Http/Middleware/CustomAuthorizationHeaderMiddleware.php on line 10
+[29-Jan-2025 13:47:05 Africa/Cairo] PHP Fatal error:  Trait "Maatwebsite\Excel\Exportable" not found in /home2/ren2godevtqnia/public_html/app/Exports/SubscriptionExport.php on line 10
+[06-May-2025 18:53:28 Africa/Cairo] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home2/ren2godevtqnia/public_html/storage/framework/views/dd1197de1320bd4d7d43d86218005983.php on line 89

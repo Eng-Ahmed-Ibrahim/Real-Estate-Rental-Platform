@@ -1,0 +1,34 @@
+[05-Nov-2024 14:10:54 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home2/ren2godevtqnia/public_html/vendor/composer/../nunomaduro/collision/src/SolutionsRepositories/NullSolutionsRepository.php): Failed to open stream: No such file or directory in /home2/ren2godevtqnia/public_html/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home2/...', '/home2/ren2gode...', 576)
+#1 /home2/ren2godevtqnia/public_html/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(2, 'include(/home2/...', '/home2/ren2gode...', 576)
+#2 /home2/ren2godevtqnia/public_html/vendor/composer/ClassLoader.php(576): include('/home2/ren2gode...')
+#3 /home2/ren2godevtqnia/public_html/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home2/ren2gode...')
+#4 /home2/ren2godevtqnia/public_html/vendor/nunomaduro/collision/src/Adapters/Laravel/CollisionServiceProvider.php(51): Composer\Autoload\ClassLoader->loadClass('NunoMaduro\\Coll...')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(908): NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider->NunoMaduro\Collision\Adapters\Laravel\{closure}(Object(Illuminate\Foundation\Application), Array)
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build(Object(Closure))
+#7 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(961): Illuminate\Container\Container->resolve('NunoMaduro\\Coll...', Array, true)
+#8 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('NunoMaduro\\Coll...', Array)
+#9 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(946): Illuminate\Container\Container->make('NunoMaduro\\Coll...', Array)
+#10 /home2/ren2godevtqnia/public_html/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(66): Illuminate\Foundation\Application->make('NunoMaduro\\Coll...')
+#11 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(207): NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler->renderForConsole(Object(Symfony\Component\Console\Output\ConsoleOutput), Object(ErrorException))
+#12 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(189): Illuminate\Foundation\Bootstrap\HandleExceptions->renderForConsole(Object(ErrorException))
+#13 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#14 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(ErrorException))
+#15 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/composer/ClassLoader.php on line 576
+[05-Nov-2024 14:10:54 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home2/ren2godevtqnia/public_html/vendor/composer/../symfony/error-handler/Error/FatalError.php): Failed to open stream: No such file or directory in /home2/ren2godevtqnia/public_html/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home2/...', '/home2/ren2gode...', 576)
+#1 /home2/ren2godevtqnia/public_html/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(2, 'include(/home2/...', '/home2/ren2gode...', 576)
+#2 /home2/ren2godevtqnia/public_html/vendor/composer/ClassLoader.php(576): include('/home2/ren2gode...')
+#3 /home2/ren2godevtqnia/public_html/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home2/ren2gode...')
+#4 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(244): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#5 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(231): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalErrorFromPhpError(Array, 0)
+#6 /home2/ren2godevtqnia/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#7 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}()
+#8 {main}
+  thrown in /home2/ren2godevtqnia/public_html/vendor/composer/ClassLoader.php on line 576
+[06-Nov-2024 16:21:32 Africa/Cairo] PHP Fatal error:  Trait "Laravel\Sanctum\HasApiTokens" not found in /home2/ren2godevtqnia/public_html/app/Models/User.php on line 15
+[06-Nov-2024 16:21:32 Africa/Cairo] PHP Fatal error:  Trait "Laravel\Sanctum\HasApiTokens" not found in /home2/ren2godevtqnia/public_html/app/Models/User.php on line 15
+[06-Nov-2024 16:21:50 Africa/Cairo] PHP Fatal error:  Trait "Laravel\Sanctum\HasApiTokens" not found in /home2/ren2godevtqnia/public_html/app/Models/User.php on line 15
