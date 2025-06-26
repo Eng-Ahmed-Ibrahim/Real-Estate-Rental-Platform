@@ -23,7 +23,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         Cache::forget('dashboard_data'); // Clear cache for fresh data
-        $data = Cache::remember('dashboard_data', 60 * 1, function () {
+        $data = Cache::remember('dashboard_data', 60 * 10, function () {
 
             $total_pending_services = Service::where('accept', 0)->count();
             $total_categories = Categories::count();

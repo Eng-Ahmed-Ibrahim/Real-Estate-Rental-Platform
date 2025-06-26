@@ -50,26 +50,26 @@ class Helpers
 
         return;
     }
-
     public static function check_if_dates_are_booked($service_id, $start_at, $end_at, $booking_id)
     {
         $startDate = $start_at ? Carbon::parse($start_at)->format('Y-m-d') : null;
-        $endDate = $end_at ? Carbon::parse($end_at)->subDay()->format('Y-m-d') : null; // نقص يوم من end_at
+        $endDate = $end_at ? Carbon::parse($end_at)->format('Y-m-d') : null;
 
         $conflictingBooking = Booking::where('service_id', $service_id)
             ->where('id', '!=', $booking_id)
+            ->whereIn('payment_status_id', [3, 4])
+            ->where("booking_status_id", 3)
             ->where(function ($query) use ($startDate, $endDate) {
-                $query->whereBetween(DB::raw("STR_TO_DATE(start_at, '%m/%d/%Y')"), [$startDate, $endDate])
-                    ->orWhereBetween(DB::raw("STR_TO_DATE(end_at, '%m/%d/%Y')"), [$startDate, $endDate])
-                    ->orWhere(function ($query) use ($startDate, $endDate) {
-                        $query->where(DB::raw("STR_TO_DATE(start_at, '%m/%d/%Y')"), '<=', $startDate)
-                            ->where(DB::raw("STR_TO_DATE(end_at, '%m/%d/%Y')"), '>=', $endDate);
-                    });
+                $query->where(function ($q) use ($startDate, $endDate) {
+                    $q->where(DB::raw("STR_TO_DATE(start_at, '%m/%d/%Y')"), '<', $endDate)
+                        ->where(DB::raw("STR_TO_DATE(end_at, '%m/%d/%Y')"), '>', $startDate);
+                });
             })
             ->exists();
 
         return $conflictingBooking;
     }
+
     public static function get_booking_total_price(DateTime  $start_at, DateTime  $end_at, $service_id)
     {
         $service = Service::find($service_id);
@@ -120,6 +120,9 @@ class Helpers
     {
         $fcm = $data['fcm'];
         $title = $data['title'];
+        if (empty($fcm) || empty($title) || empty($data['model_type']) || empty($data['model_id']) || empty($data['description'])) {
+            return;
+        }
         $model_type = $data['model_type'];
         $model_id = $data['model_id'];
         $description = $data['description'];
@@ -182,7 +185,9 @@ class Helpers
 
         $fcm = $data['fcm'];
         $title = $data['title'];
-
+        if (empty($fcm) || empty($title) || empty($data['model_type']) || empty($data['model_id']) || empty($data['description'])) {
+            return;
+        }
         $description = $data['description'];
         $model_type = $data['model_type'];
         $model_id = $data['model_id'];
@@ -389,8 +394,8 @@ class Helpers
         if ($user->last_otp_sent && now()->diffInSeconds($user->last_otp_sent) < 60) {
             $secondsLeft = 60 - now()->diffInSeconds($user->last_otp_sent);
             return response()->json([
-                "message"=>__('messages.otp_wait_message', ['seconds' => $secondsLeft])
-            ],422);
+                "message" => __('messages.otp_wait_message', ['seconds' => $secondsLeft])
+            ], 422);
         }
         $otp = rand(10000, 99999);
         $email = $user->email;

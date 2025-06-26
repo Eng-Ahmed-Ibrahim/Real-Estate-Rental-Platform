@@ -117,31 +117,7 @@
 @endsection
 @section('content')
 <div class="d-flex flex-column flex-column-fluid">
-    <div class="container">
 
-        @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show " role="alert">
-            {{session('success')}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-        @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show " role="alert">
-            {{session('error')}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-        @if($errors->any())
-        @foreach($errors->all() as $error)
-
-        <div class="alert alert-danger alert-dismissible fade show " role="alert">
-            {{ $error }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endforeach
-        @endif
-
-    </div>
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
         <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
@@ -308,16 +284,16 @@
 
                         </div>
                         <div class="row my-5">
-                            <div class="col">
-                                <div class="form-floating">
+                            <div class="col mb-3">
+                                <label for="floatingTextarea2">{{__('messages.Description_en')}}</label>
+                                <div class="">
                                     <textarea required name="description_en" class="form-control" placeholder="{{__('messages.Description_en')}}" id="floatingTextarea2" style="height: 100px">{{$service->description}}</textarea>
-                                    <label for="floatingTextarea2">{{__('messages.Description_en')}}</label>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="form-floating">
+                            <div class="col mb-3">
+                                <label for="floatingTextarea2">{{__('messages.Description_ar')}}</label>
+                                <div class="">
                                     <textarea required name="description_ar" class="form-control" placeholder="{{__('messages.Description_ar')}}" id="floatingTextarea2" style="height: 100px">{{$service->description_ar}}</textarea>
-                                    <label for="floatingTextarea2">{{__('messages.Description_ar')}}</label>
                                 </div>
                             </div>
                         </div>

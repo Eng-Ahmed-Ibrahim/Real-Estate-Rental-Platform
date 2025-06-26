@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Validation\Rules\Password;
 
 class UsersController extends Controller
 {
@@ -68,7 +69,17 @@ class UsersController extends Controller
                 "image" => 'required',
                 "power" => 'required',
                 "phone" => "required|unique:users,phone",
-                'password' => 'required|min:8', //password_confirmation
+                'password' => 'required|min:8|confirmed', //password_confirmation
+                            'password' => [
+                'required',
+                'confirmed',
+                'string',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+            ],
 
             ],
             [
@@ -76,18 +87,29 @@ class UsersController extends Controller
                 "image.required" => __('messages.Validate_image'),
                 "phone.required" => __('messages.Validate_phone'),
                 "password.required" => __('messages.Validate_password'),
+                        "password.confirmed" => __('messages.Password_confirmation_mismatch'),
+
             ]
         );
 
 
+        $check = User::where('email', $request->email)->orWhere("phone",$request->phone)
+        ->where('power', $request->power)
+        ->exists();
+        if($check) {
+            session()->flash("error", __('messages.Email_or_phone_already_exists'));
+            return back();
+        }
+        
         $user = User::create([
             "name" => $request->name,
             "image" => Helpers::upload_files($request->image),
-            "phone" => (strpos($request->phone, '2') === 0) ? $request->phone : '2' . $request->phone,
+            "phone" => $request->country_code . $request->phone,
             "power" => $request->power,
             "bio" => $request->bio,
             "email" => $request->email,
             "password" => bcrypt($request->password),
+            "email_verified_at"=> Carbon::now(),
         ]);
         if ($user->power == 'customer') {
             Cache::forget("customers");

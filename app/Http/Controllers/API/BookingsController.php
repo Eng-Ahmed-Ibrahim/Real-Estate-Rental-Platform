@@ -34,8 +34,9 @@ class BookingsController extends Controller
 {
     use ResponseTrait;
     private $bookingService;
-    function __construct(BookingServices $bookingService){
-        $this->bookingService=$bookingService;
+    function __construct(BookingServices $bookingService)
+    {
+        $this->bookingService = $bookingService;
     }
     public function ProviderServices(Request $request)
     {
@@ -178,10 +179,10 @@ class BookingsController extends Controller
             $time = $booking->overview_time; // The number of hours to subtract
             $timeToCompare = $createdAt->addHours($time); //  addHours
             if (now()->greaterThanOrEqualTo($timeToCompare)) {
-                // $booking->update([
-                //     "booking_status_id" => 6,
-                // ]);
-                $booking->delete();
+                $booking->update([
+                    "booking_status_id" => 6,
+                ]);
+                // $booking->delete();
             }
         }
         $approved_bookings = Booking::where("booking_status_id", 3)->where('payment_method_id', null)->where("payment_status_id", 2)->get();
@@ -280,13 +281,14 @@ class BookingsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             "service_id" => "required",
-            "start_at" => "required",
-            "end_at" => "required",
-            // "attachment" => "required",
-            // "payment_method_id" => "required",
+            "start_at" => "required|date",
+            "end_at" => "required|date|after:start_at",
+        ], [
+            'end_at.after' => __('messages.after_date'),
         ]);
         if ($validator->fails())
-            return $this->Response($validator->errors(), "Data Not Valid", 422);
+            return $this->Response($validator->errors(), $validator->errors()->first(), 422);
+
 
         $service = Service::find($request->service_id);
         if (!$service)
@@ -410,17 +412,16 @@ class BookingsController extends Controller
                         $total += $taxes;
                 }
             }
-
         }
 
 
-        $customer=User::find($request->user()->id);
-        $settings= Setting::find(1);
-        
+        $customer = User::find($request->user()->id);
+        $settings = Setting::find(1);
+
         $overview_time = $customer->overview_time > 0 ? $customer->overview_time : $settings->overview_time;
         $overview_time_payment = $settings->overview_time_payment;
         $has_partial_option =  $amount < $settings->min_partial_payment ? false : true;
-        $data=[
+        $data = [
             "amount" => $total, // before taxes without commission
             'insurance' => 0,
             "taxes" => $taxes,
@@ -507,29 +508,29 @@ class BookingsController extends Controller
                 ->exists();
 
             if ($overlapExists) {
-                return $this->Response(null,__('messages.booking_conflict'),422);
+                return $this->Response(null, __('messages.booking_conflict'), 422);
             }
         }
 
-            $check_is_booked=Helpers::check_if_dates_are_booked($booking->service_id, $booking->start_at, $booking->end_at, $booking->id);
-            if($check_is_booked)
-                return $this->Response(null, "The selected dates are already booked.2", 422);
-    
-        if($request->status==3 && $request->payment_plan != 'full' && $request->payment_plan != "partial")
-            return $this->Response(null,'payment plan required',422);
+        $check_is_booked = Helpers::check_if_dates_are_booked($booking->service_id, $booking->start_at, $booking->end_at, $booking->id);
+        if ($check_is_booked)
+            return $this->Response(null, __("messages.The_selected_dates_are_already_booked"), 422);
 
-        $down_payment=0;
-        if( $request->payment_plan == "partial"){
-            $value=Setting::find(1)->down_payment;
+        if ($request->status == 3 && $request->payment_plan != 'full' && $request->payment_plan != "partial")
+            return $this->Response(null, 'payment plan required', 422);
+
+        $down_payment = 0;
+        if ($request->payment_plan == "partial") {
+            $value = Setting::find(1)->down_payment;
             $down_payment = ($booking->total_amount * $value) / 100;
         }
- 
+
         $booking->update([
             "booking_status_id" => $request->status,
             "comment" => $request->comment ?? $booking->comment,
             "approved_at" => $request->status == 3 ? now() : null,
-            "payment_plan"=> $request->payment_plan,
-            "down_payment"=> $down_payment,
+            "payment_plan" => $request->payment_plan,
+            "down_payment" => $down_payment,
         ]);
 
         if ($booking->booking_status_id == 1) {
@@ -553,8 +554,8 @@ class BookingsController extends Controller
         $fcms = FCM::where("user_id", $booking->customer_id)->get();
         foreach ($fcms as $fcm) {
             $notification_data = [
-                "title" => session('lang') == "en" ? __('messages.booking_status_title') : __('messages.booking_status_title', [], 'ar'),
-                "description" => session('lang') == "en" ? __('messages.booking_status_changed', ['booking_status' => $booking_status_en]) : __('messages.booking_status_changed', ['booking_status' => $booking_status_ar], 'ar'),
+                "title" => $booking->customer->lang == "en" ? $notification_title_en : $notification_title_ar,
+                "description" => $booking->customer->lang == "en" ?  $notification_description_en :  $notification_description_ar,
                 'fcm' => $fcm->fcm_token,
                 'model_id' => $booking->service_id,
                 "model_type" => 2,
@@ -581,7 +582,7 @@ class BookingsController extends Controller
         if ($validator->fails())
             return $this->Response($validator->errors(), "Data Not Valid", 422);
 
-        $booking = Booking::where("id", $request->booking_id)->where("provider_id", $request->user()->id)->with(['customer','provider'])->first();
+        $booking = Booking::where("id", $request->booking_id)->where("provider_id", $request->user()->id)->with(['customer', 'provider'])->first();
         if (!$booking)
             return $this->Response(null, "Not Allowed", 403);
 
@@ -598,68 +599,80 @@ class BookingsController extends Controller
 
 
 
-        if ($request->status == 3 && $booking->payment_status_id != 3) {
+        if (($request->status == 3  || $booking->booking_status_id == 4)) {
             $service = $booking->service;
             if (!$service) {
                 return $this->Response(null, "service not found", 401);
             }
             $booking->update([
-                "payment_status_id" => $booking->payment_plan == 'full' ? 3 : ($booking->down_paid==0 ? 4 : 3), //paid
+                "payment_status_id" => $booking->payment_plan == 'full' ? 3 : ($booking->down_paid == 0 ? 4 : 3), //paid
                 "booking_status_id" => 3, //approved
             ]);
-            
+
             $booking->provider->update([
                 "blance" => ($booking->provider->blance) + $booking->amount,
             ]);
             // User::find($booking->provider_id)->update([
             //     "blance" => (User::find($booking->provider_id)->blance) + $booking->amount,
             // ]);
-            $total_paid= $booking->payment_plan == 'full' ? $booking->total_amount : ($booking->down_paid==0 ? $booking->down_payment : $booking->total_amount - $booking->down_paid) ;
-            if($booking->payment_status_id ==3){
+            $total_paid = $booking->payment_plan == 'full' ? $booking->total_amount : ($booking->down_paid == 0 ? $booking->down_payment : $booking->total_amount - $booking->down_paid);
+            if ($booking->payment_status_id == 3) {
                 $customer = $booking->customer;
                 $customer->update([
                     "points" => $customer->points +  Setting::find(1)->point_earn_on_each_booking,
                 ]);
             }
+            if ($booking->payment_plan == 'partial' || $booking->payment_status_id == 3) {
+                Helpers::delete_days_after_booking($booking->id);
+            }
             Earning::create([
                 "user_id" => $booking->provider_id,
                 "total_booking" => 1,
                 "total_earning" => $total_paid,
-                "provider_earning" => $booking->payment_status_id==3 ? $booking->amount : 0,
-                'admin_earning' => $booking->payment_status_id==3 ? $booking->taxes : 0,
+                "provider_earning" => $booking->payment_status_id == 3 ? $booking->amount : 0,
+                'admin_earning' => $booking->payment_status_id == 3 ? $booking->taxes : 0,
                 'service_id' => $service->id,
                 'booking_id' => $booking->id,
             ]);
         }
-
         $payment_status_en = '';
         $payment_status_ar = '';
+
         if ($request->status == 1) {
-            $payment_status_en = __('messages.status_unpaid', [], 'en');
-            $payment_status_ar = __('messages.status_unpaid', [], 'ar');
-        } else if ($request->status == 2) {
-            $payment_status_en = __('messages.status_pending', [], 'en');
-            $payment_status_ar = __('messages.status_pending', [], 'ar');
-        } else if ($request->status == 3) {
-            $payment_status_en = __('messages.status_paid', [], 'en');
-            $payment_status_ar = __('messages.status_paid', [], 'ar');
+            $payment_status_en = "Unpaid";
+            $payment_status_ar = "غير مدفوع";
+        } elseif ($request->status == 2) {
+            $payment_status_en = "Pending";
+            $payment_status_ar = "قيد الانتظار";
+        } elseif ($request->status == 3) {
+            $payment_status_en = "Paid";
+            $payment_status_ar = "مدفوع";
+        } elseif ($request->status == 4) {
+            $payment_status_en = "Partial payment";
+            $payment_status_ar = "دفع جزئي";
         }
-        $notification_title_en = __('messages.payment_status_title', [], 'en');
-        $notification_title_ar = __('messages.payment_status_title', [], 'ar');
-        $notification_description_en = __('messages.payment_status_changed', ['booking_status' => $payment_status_en], 'en');
-        $notification_description_ar = __('messages.payment_status_changed', ['booking_status' => $payment_status_ar], 'ar');
+
+        // عناوين الإشعار ثابتة (مش من messages)
+        $notification_title_en = "Payment Status";
+        $notification_title_ar = "حالة الدفع";
+
+        $notification_description_en = "Payment status changed to: {$payment_status_en}";
+        $notification_description_ar = "تم تغيير حالة الدفع إلى: {$payment_status_ar}";
 
         $fcms = FCM::where("user_id", $booking->customer_id)->get();
+
         foreach ($fcms as $fcm) {
             $notification_data = [
-                "title" => session('lang') == "en" ? __('messages.payment_status_title') : __('messages.payment_status_title', [], 'ar'),
-                "description" => session('lang') == "en" ? __('messages.payment_status_changed', ['booking_status' => $payment_status_en]) : __('messages.payment_status_changed', ['booking_status' => $payment_status_ar], 'ar'),
+                "title" => $booking->customer->lang === "en" ? $notification_title_en : $notification_title_ar,
+                "description" => $booking->customer->lang === "en" ? $notification_description_en : $notification_description_ar,
                 'fcm' => $fcm->fcm_token,
                 'model_id' => $booking->service_id,
                 "model_type" => 2,
             ];
+
             Helpers::push_notification_user($notification_data);
         }
+
 
         $notification_data["title_ar"] = $notification_title_ar;
         $notification_data["title_en"] = $notification_title_en;
@@ -676,7 +689,7 @@ class BookingsController extends Controller
     }
 
     public function upload_attachment_to_booking(Request $request)
-    {   
+    {
         // Validate request data
         $validator = Validator::make($request->all(), [
             "booking_id" => "required",
@@ -717,15 +730,15 @@ class BookingsController extends Controller
                 $newFilename = time() . '_' . str_replace(" ", "_", $request->attachment->getClientOriginalName());
                 $request->attachment->move(public_path("files/"), $newFilename);
 
-                if($booking->payment_plan=="partial" && $booking->down_paid==0){
-   
+                if ($booking->payment_plan == "partial" && $booking->down_paid == 0) {
+
                     $booking->update([
                         "down_attachment" => "files/$newFilename",
                         'payment_method_id' => 4,
                         "payment_type" => "bank_transfer",
                         "comment" => $request->comment,
                     ]);
-                }else{
+                } else {
                     // Update booking
                     $booking->update([
                         "attachment" => "files/$newFilename",
@@ -734,7 +747,7 @@ class BookingsController extends Controller
                         "comment" => $request->comment,
                     ]);
                 }
-                $required_amount=$booking->payment_plan=="full"?$booking->amount :  ($booking->down_paid==0 ? $booking->down_payment : $booking->amount -  $booking->down_payment) ;
+                $required_amount = $booking->payment_plan == "full" ? $booking->amount : ($booking->down_paid == 0 ? $booking->down_payment : $booking->amount -  $booking->down_payment);
                 $invoice_id = Payment::orderBy("id", "DESC")->first() ? Payment::orderBy("id", "DESC")->first()->invoice_id + 1 : 10000;
                 Payment::create([
                     "invoice_id" => $invoice_id,
@@ -830,7 +843,7 @@ class BookingsController extends Controller
 
             $check_is_booked = Helpers::check_if_dates_are_booked($booking->service_id, $booking->start_at, $booking->end_at, $booking->id);
             if ($check_is_booked)
-                return $this->Response(null, "The selected dates are already booked.2", 422);
+                return $this->Response(null, "The selected dates are already booked", 422);
 
             // Check if booking status is allowed for payment
             if ($booking->booking_status_id == 3) {
@@ -868,13 +881,13 @@ class BookingsController extends Controller
 
                 $user = User::find($request->user()->id);
 
-                $required_amount=0;
-                if($booking->payment_plan=="partial" && $booking->down_paid == 0)
-                    $required_amount= $booking->down_payment; 
-                elseif($booking->payment_plan =="partial" && $booking->down_paid == $booking->down_payment)
-                    $required_amount= $booking->total_amount - $booking->down_paid  ;
-                elseif($booking->payment_plan=="full")
-                    $required_amount= $booking->total_amount; 
+                $required_amount = 0;
+                if ($booking->payment_plan == "partial" && $booking->down_paid == 0)
+                    $required_amount = $booking->down_payment;
+                elseif ($booking->payment_plan == "partial" && $booking->down_paid == $booking->down_payment)
+                    $required_amount = $booking->total_amount - $booking->down_paid;
+                elseif ($booking->payment_plan == "full")
+                    $required_amount = $booking->total_amount;
 
                 // Check if the user has enough balance
                 if ($user->blance < $required_amount) {
@@ -896,12 +909,12 @@ class BookingsController extends Controller
                     "attachment" => "static/reservation.png"
                 ]);
 
-                $payment_status_id=$booking->payment_plan == "full" ? 3 : ( $booking->payment_status_id == 4 ? 3 : 4);
+                $payment_status_id = $booking->payment_plan == "full" ? 3 : ($booking->payment_status_id == 4 ? 3 : 4);
                 // Update booking with payment type
                 $booking->update([
                     "payment_status_id" =>  $payment_status_id,
                     'payment_type' => "wallet",
-                    "down_paid"=> $booking->payment_plan == "partial" ? ($booking->down_paid == 0 ?  $required_amount : $booking->down_paid) : 0,
+                    "down_paid" => $booking->payment_plan == "partial" ? ($booking->down_paid == 0 ?  $required_amount : $booking->down_paid) : 0,
                 ]);
 
                 // Generate invoice ID and create a payment record
@@ -925,7 +938,10 @@ class BookingsController extends Controller
                 User::find($booking->provider_id)->update([
                     "blance" => (User::find($booking->provider_id)->blance) + $booking->amount,
                 ]);
-                if($booking->payment_status_id==3){
+                if ($booking->payment_status_id == 3 || $booking->payment_plan == 'partial') {
+                    Helpers::delete_days_after_booking($booking->id);
+                }
+                if ($booking->payment_status_id == 3) {
 
                     Earning::create([
                         "user_id" => $booking->provider_id,
@@ -935,8 +951,8 @@ class BookingsController extends Controller
                         'admin_earning' => $booking->taxes,
                         "booking_id" => $booking->id,
                     ]);
-                    Helpers::delete_days_after_booking($booking->id);
                 }
+
 
                 // Commit the transaction if all operations succeed
                 DB::commit();
@@ -950,7 +966,7 @@ class BookingsController extends Controller
                 $notification_description_en = "$user->name paid the reservation via the wallet";
                 $notification_description_ar = "$user->name دفع الحجز عبر المحفظة";
 
-                $provider = User::find($booking->provider_id);
+                $provider = $booking->provider;
                 $lang = $provider->lang;
 
                 foreach ($fcms as $fcm) {
@@ -989,7 +1005,6 @@ class BookingsController extends Controller
 
     public function get_price_of_days(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             "start_at" => "required",
             "end_at" => "required",
@@ -1039,10 +1054,10 @@ class BookingsController extends Controller
             // Subtract one day from the total
             $adjustedDays = $totalDays;
             $data["total_days"] = $adjustedDays;
-            $data["total"] =  (int) $booking->total_amount ;
+            $data["total"] =  (int) $booking->total_amount;
             $data['payment_plan'] = $booking->payment_plan;
-            
-            $data['paid'] = $booking->payment_plan == "full" || $booking->payment_status_id == 3 ? (int) $booking->total_amount : (int) $booking->down_paid ;
+
+            $data['paid'] = $booking->payment_plan == "full" || $booking->payment_status_id == 3 ? (int) $booking->total_amount : (int) $booking->down_paid;
 
             if ($booking->payment_status_id == 3) {
                 $data['remain'] = 0;
@@ -1062,7 +1077,6 @@ class BookingsController extends Controller
         }
 
         $eventDaysData = ServiceEventDays::where("service_id", $request->service_id)->get();
-
 
         foreach ($dates as $key => $date) {
             foreach ($eventDaysData as $event_day) {
@@ -1090,13 +1104,11 @@ class BookingsController extends Controller
                 $commission_money = (($total * $commission_value) / 100);
                 $commission_event_days = (($event_days_prices * $commission_value) / 100);
             } else {
-
                 $commission_money =  $commission_value * (count($eventDays) + count($dates));
                 $commission_event_days = $commission_value * (count($eventDays));
             }
         } else {
             $commission_value = $commission->commission_value;
-
             if ($commission->commission_type == "percentage") {
                 $commission_money = (($total * $commission_value) / 100);
                 $commission_event_days = (($event_days_prices * $commission_value) / 100);
@@ -1139,7 +1151,7 @@ class BookingsController extends Controller
                     }
                 }
                 $data["coupon_type"] = $coupon->type;
-                $data['coupon_value'] =$coupon->coupon_value;
+                $data['coupon_value'] = $coupon->coupon_value;
             } else {
                 $data["total_after_apply_coupon"] = __('messages.Coupon_not_valid');
             }
@@ -1156,20 +1168,26 @@ class BookingsController extends Controller
         ]);
         if ($validator->fails())
             return $this->Response($validator->errors(), "Data Not Valid", 422);
-        $booking = Booking::where("id",$request->booking_id)->with(['customer'])->first();
+        $booking = Booking::where("id", $request->booking_id)->with(['customer'])->first();
         if ($booking->booking_status_id == 5) {
             return $this->Response(null, __('messages.Already_cancelled'), 401);
         }
-        $setting=Setting::find(1);
+        if ($booking->booking_status_id == 1) {
+            $booking->update([
+                'booking_status_id' => 5,
+            ]);
+            return $this->Response(null, __('messages.Cancelled_successfully', ["refund" => 0, "deduct_amount" => 0]), 201);
+        }
+        $setting = Setting::find(1);
         $dateFromDatabase = $booking->start_at;
         $currentDate = Carbon::now();
-        
+
         $hoursDifference = $currentDate->diffInHours($dateFromDatabase);
         if ($hoursDifference > $setting->cancel_within_hours) {
-  
+
             $payment = Payment::where('booking_id', $booking->id)->first();
             $customer = $booking->customer;
-            if ($booking->payment_status_id==4 || $booking->payment_status_id == 3) {
+            if ($booking->payment_status_id == 4 || $booking->payment_status_id == 3) {
 
                 $payment->update([
                     "is_cancelled" => true,
@@ -1179,29 +1197,28 @@ class BookingsController extends Controller
                 $hoursDifference = $currentDate->diffInHours($dateFromDatabase);
 
                 // return full refund
-                $refund_blacnce =0;
-                if($hoursDifference > $setting->refund_full_amount_within_hours){
-                    $amount = $booking->payment_status_id==4 ?  $booking->down_paid :  $booking->total_amount;
-                    $refund_blacnce= round($amount);
-                    $message=__("messages.Cancelled_successfully",["refund"=>$refund_blacnce,"deduct_amount"=>0]);
+                $refund_blacnce = 0;
+                if ($hoursDifference > $setting->refund_full_amount_within_hours) {
+                    $amount = $booking->payment_status_id == 4 ?  $booking->down_paid :  $booking->total_amount;
+                    $refund_blacnce = round($amount);
+                    $message = __("messages.Cancelled_successfully", ["refund" => $refund_blacnce, "deduct_amount" => 0]);
                     $message = __("messages.Cancelled_successfully", [
                         "refund" => $refund_blacnce,
                         "deduct_amount" => 0
                     ]);
-                }else{
-                    $deduct_an_amount= $setting->deduct_an_amount;
-                    $amount=($booking->payment_status_id==4 ?  $booking->down_paid :  $booking->total_amount);
-                    $cut_amount =  $amount * $deduct_an_amount /100;
+                } else {
+                    $deduct_an_amount = $setting->deduct_an_amount;
+                    $amount = ($booking->payment_status_id == 4 ?  $booking->down_paid :  $booking->total_amount);
+                    $cut_amount =  $amount * $deduct_an_amount / 100;
 
-                    $refund_blacnce = round ($amount - $cut_amount);
+                    $refund_blacnce = round($amount - $cut_amount);
                     $message = __("messages.Cancelled_successfully", [
                         "refund" => $refund_blacnce,
                         "deduct_amount" => $cut_amount
                     ]);
-
                 }
                 $customer->update([
-                    "blance"=>$customer->blance + $refund_blacnce,
+                    "blance" => $customer->blance + $refund_blacnce,
                     "points" => $customer->points -  $setting->point_earn_on_each_booking,
                 ]);
                 $earning = Earning::where('booking_id', $booking->id)->first();
@@ -1209,12 +1226,12 @@ class BookingsController extends Controller
                     $earning->update([
                         "is_cancelled" => true,
                     ]);
+                Helpers::add_days_after_cancel_request($booking->id);
             }
-                      $booking->update([
+            $booking->update([
                 'booking_status_id' => 5,
             ]);
-            Helpers::add_days_after_cancel_request($booking->id);
-            
+
             return $this->Response(null, $message, 201);
         } else {
             return $this->Response(null, __('messages.Not_allowed_to_cancel_booking'), 401);

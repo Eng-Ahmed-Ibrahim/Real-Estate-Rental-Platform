@@ -56,8 +56,13 @@ class AuthController extends Controller
             ->orWhere("email", $request->phone)
             ->where("power", $role)->first();
 
+
+        if (! $user) {
+            return $this->Response(__('messages.phone_number_or_password_incorrect'), __('messages.phone_number_or_password_incorrect'), 422);
+        }
+
         if (! $user || !Hash::check($request->password, $user->password)) {
-            return $this->Response(__('messages.Incorrect_phone_or_password'), __('messages.Incorrect_phone_or_password'), 401);
+            return $this->Response(__('messages.phone_number_or_password_incorrect'), __('messages.phone_number_or_password_incorrect'), 422);
         }
         if ($user->blocked == 1) {
             return $this->Response(null, __('messages.Blocked_user'), 403);
@@ -67,13 +72,14 @@ class AuthController extends Controller
         ]);
         $user->tokens()->delete();
         $token = $user->createToken('API Token')->plainTextToken;
-        $check_fcm = FCM::where("user_id", $user->id)
-            ->where("fcm_token", $request->fcm_token)->first();
-        if (!$check_fcm)
-            FCM::create([
-                "user_id" => $user->id,
-                "fcm_token" => $request->fcm_token,
-            ]);
+        $fcms = FCM::where("user_id", $user->id)->get();
+        foreach ($fcms as $fcm) {
+            $fcm->delete();
+        }
+        FCM::create([
+            "user_id" => $user->id,
+            "fcm_token" => $request->fcm_token,
+        ]);
 
         $data = [
             "user" => $user,
@@ -119,8 +125,8 @@ class AuthController extends Controller
         else
             $role = "customer";
         $user = User::where("phone", $request->phone)
-        ->orWhere("email", $request->email)
-        ->where("power", $role)->first();
+            ->orWhere("email", $request->email)
+            ->where("power", $role)->first();
         // return $this->Response($user,"",200);
         if ($user) {
             if ($user->blocked == 1) {
@@ -129,7 +135,7 @@ class AuthController extends Controller
                     "blocked" => 0,
                     "password" => bcrypt($request->password),
                     "name" => $request->name,
-                    "email_verified_at"=>null,
+                    "email_verified_at" => null,
 
                 ]);
                 $check_fcm = FCM::where("user_id", $user->id)->where("fcm_token", $request->fcm_token)->first();
@@ -152,7 +158,7 @@ class AuthController extends Controller
 
                 return $this->Response($data, __('messages.Account_recovered'), 201);
             } else {
-                return $this->Response(null, __('messages.unique', ['attribute' => __('messages.attributes.phone')]), 422);
+                return $this->Response(null, __("messages.Email_or_phone_already_exists"), 422);
             }
         }
 

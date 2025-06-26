@@ -54,6 +54,12 @@ Route::post("/send-otp", [OtpController::class, 'send_otp']);
 Route::post("/verify-eamil", [OtpController::class, 'verify_otp']);
 Route::post("/resend-otp", [OtpController::class, 'resend_otp']);
 
+
+
+Route::group(['middleware' => ['custom-auth','lang_apis']], function () {
+        Route::post('/support', [SupportController::class, 'store']);
+
+});
 Route::group(['middleware' => ['custom-auth','lang_apis', 'checkIfBlocked']], function () {
     Broadcast::routes();
     Route::get('/home', [ApiController::class, 'home']);
@@ -115,7 +121,6 @@ Route::group(['middleware' => ['custom-auth','lang_apis', 'checkIfBlocked']], fu
     Route::post('/service/delete-gallery', [ServiceController::class, "delete_image_gallery"]);
 
 
-    Route::post('/support', [SupportController::class, 'store']);
 
     Route::get('/reviews', [ReviewsController::class, 'reviews']);
     Route::post('/add-review', [ReviewsController::class, 'add_review']);

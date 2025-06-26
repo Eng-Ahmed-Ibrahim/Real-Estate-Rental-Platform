@@ -112,24 +112,7 @@
 @endsection
 @section('content')
     <div class="d-flex flex-column flex-column-fluid">
-        <div class="container">
-
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show " role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                        {{ $error }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endforeach
-            @endif
-
-        </div>
+ 
         <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
             <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
                 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -339,26 +322,26 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-6 my-2">
+                                {{-- <div class="col-6 my-2">
                                     <label for="rating" class="form-label">{{ __('messages.Rating') }}</label>
                                     <input type="number" class="form-control" name="rating" id="rating"
                                         placeholder="{{ __('messages.Rating') }}" min="0" max="5"
                                         step="0.1" value="{{ old('rating') }}">
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="row my-5">
-                                <div class="col">
-                                    <div class="form-floating">
+                                <div class="col mb-3">
+                                    <label for="description_en">{{ __('messages.Description_en') }}</label>
+                                    <div>
                                         <textarea name="description_en" class="form-control" placeholder="{{ __('messages.Description_en') }}"
                                             id="description_en" style="height: 100px">{{ old('description_en') }}</textarea>
-                                        <label for="description_en">{{ __('messages.Description_en') }}</label>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="form-floating">
+                                <div class="col mb-3">
+                                    <label for="description_ar">{{ __('messages.Description_ar') }}</label>
+                                    <div>
                                         <textarea name="description_ar" class="form-control" placeholder="{{ __('messages.Description_ar') }}"
                                             id="description_ar" style="height: 100px">{{ old('description_ar') }}</textarea>
-                                        <label for="description_ar">{{ __('messages.Description_ar') }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -620,39 +603,33 @@
             let days = document.querySelector('.days').value;
             console.log(days);
 
-            // Get the select element
             let selectElement = document.querySelector('.selectDays');
 
+            // Empty the select before updating
+            selectElement.innerHTML = '';
+
             if (days) {
-                // Split the input string by the delimiter
-                let datesArray = days.split(';').map(date => date.trim());
+                // Step 1: Split and format the dates into a clean array
+                let datesArray = days
+                    .split(';')
+                    .map(date => moment(date.trim(), 'MM/DD/YYYY')) // parse with moment
+                    .filter(m => m.isValid());
 
-                // Iterate over each date in the array
-                datesArray.forEach(date => {
-                    // Format the date using Moment.js  06/02/2024
-                    let formattedDate = moment(date, 'MM/DD/YYYY hh:mm A').format('MM/DD/YYYY hh:mm A');
-                    let formattedDate_show = moment(date, 'MM/DD/YYYY').format('MM/DD/YYYY');
+                // Step 2: Sort the dates
+                datesArray.sort((a, b) => a.toDate() - b.toDate());
 
-                    // Check if the formatted date is already in the select options
-                    let options = selectElement.options;
-                    let exists = false;
-                    for (let i = 0; i < options.length; i++) {
-                        if (options[i].value === formattedDate_show) {
-                            exists = true;
-                            break;
-                        }
-                    }
+                // Step 3: Loop over sorted array and add to select
+                datesArray.forEach(m => {
+                    let formattedDate = m.format('MM/DD/YYYY');
 
-                    // If the date is not already an option, add it
-                    if (!exists) {
-                        let newOption = document.createElement('option');
-                        newOption.text = formattedDate_show;
-                        newOption.value = formattedDate_show;
-                        selectElement.appendChild(newOption);
-                    }
+                    let newOption = document.createElement('option');
+                    newOption.text = formattedDate;
+                    newOption.value = formattedDate;
+                    selectElement.appendChild(newOption);
                 });
             }
         }
+
 
 
         function submitForm() {

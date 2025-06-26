@@ -8,6 +8,9 @@
          } */
 
 
+         body , html{
+            overflow-x:  hidden !important ; 
+         }
         main {
             width: 100%;
             min-height: 300px;
@@ -219,6 +222,9 @@
 
         tr:hover {
             transform: scale(1.1);
+        }
+        .card-body{
+            overflow: hidden !important;
         }
     </style>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -498,14 +504,14 @@
 
                                 <div class="card">
 
-                                    <div id="adminTotal" class="card-body" style="    padding: 10px;margin-right: 20px; ">
+                                    <div id="adminTotal" class="card-body" style="overflow:hidden;padding: 10px;margin-right: 20px; ">
                                         <div> <span class="currency">{{ __('messages.EGP') }}</span> <span
                                                 class="total">{{ $currentMonthEarnings['admin'] }}</span> </div>
                                         <div>{{ __('messages.Admin_Earning') }}</div>
                                     </div>
                                 </div>
                                 <div class="card mx-2">
-                                    <div id="providerTotal" class="card-body" style="    padding: 10px;margin-right: 10px; ">
+                                    <div id="providerTotal" class="card-body" style=" overflow:hidden;   padding: 10px;margin-right: 10px; ">
                                         <div> <span class="currency">{{ __('messages.EGP') }}</span> <span
                                                 class="total">{{ $currentMonthEarnings['provider'] }}</span> </div>
                                         <div>{{ __('messages.Provider_Earning') }}</div>

@@ -19,6 +19,10 @@ class PropertiesServices
         $services = [];
         foreach ($data as $service) {
 
+
+            $check_futures_days = $this->check_futures_dates($filters, $service->days);
+            if (! $check_futures_days)
+                continue;
             $serviceFeatureIds = array_map('intval', $service->features->pluck('feature_id')->toArray()); // Convert to integers
             if (! empty(array_diff($requiredFeatures, $serviceFeatureIds)))
                 continue;
@@ -49,42 +53,6 @@ class PropertiesServices
             }
         }
         return $services;
-    }
-    public function apply_event_days()
-    {
-        // Cache today's date
-        $today = date("m/d/Y");
-
-        // Batch process event days for today
-        $eventDays_of_today_first_time = ServiceEventDays::where('day', $today)->where("status", 0)->get();
-        $eventDays_of_old_todays_sec_time = ServiceEventDays::where('day', '<', $today)->where("status", 1)->get();
-
-        // Use collections for bulk updates
-        if ($eventDays_of_today_first_time->isNotEmpty()) {
-            $todayEvents = $eventDays_of_today_first_time->map(function ($event) {
-                $service = $event->service;
-                $commission_money = (($service->commission_percentage / $event->price) * 100);
-                $service->update([
-                    "price" => $event->price + $commission_money,
-                    'commission_money' => $commission_money,
-                    "provider_money" => $event->price - $commission_money,
-                ]);
-                $event->update(['status' => 1]);
-            });
-        }
-
-        if ($eventDays_of_old_todays_sec_time->isNotEmpty()) {
-            $oldEvents = $eventDays_of_old_todays_sec_time->map(function ($event) {
-                $service = $event->service;
-                $commission_money = (($service->commission_percentage / $service->regular_price) * 100);
-                $service->update([
-                    "price" => $service->regular_price + $commission_money,
-                    'commission_money' => $commission_money,
-                    "provider_money" => $service->regular_price - $commission_money,
-                ]);
-                $event->update(['status' => 2]);
-            });
-        }
     }
     private function buildFilteredQuery($filters)
     {
@@ -171,6 +139,7 @@ class PropertiesServices
             $query->where('duration', $filters['duration']);
         }
 
+
         // Optional: Define $subscribers if required (not shown in your example)
         $subscribers = $filters['subscribers'] ?? [];
 
@@ -196,25 +165,56 @@ class PropertiesServices
                     } catch (\Exception $e) {
                     }
                 }
-            }
-
+            }            
             $data = $data->filter(function ($service) use ($parsedRanges) {
-                $days = json_decode($service->days ?? '[]');
-
-                foreach ($days as $dateString) {
-                    try {
-                        $day = \Carbon\Carbon::createFromFormat('m/d/Y g:i A', $dateString);
-                        foreach ($parsedRanges as [$start, $end]) {
-                            if ($day->between($start, $end)) {
-                                return true;
-                            }
+                $days = collect(json_decode($service->days ?? '[]'))
+                    ->map(function ($dateString) {
+                        try {
+                            return \Carbon\Carbon::createFromFormat('m/d/Y g:i A', $dateString)->toDateString();
+                        } catch (\Exception $e) {
+                            return null;
                         }
-                    } catch (\Exception $e) {
-                    }
-                }
+                    })
+                    ->filter() // Remove nulls
+                    ->unique(); // إزالة التكرار لو موجود
 
-                return false;
-            })->values(); // Reset keys
+                // نجمع كل الأيام المطلوبة من كل الـ ranges
+                $requiredDays = collect($parsedRanges)->flatMap(function (array $range) {
+                    [$start, $end] = $range;
+                    return collect();
+                })->merge(
+                    collect($parsedRanges)->flatMap(function (array $range) {
+                        [$start, $end] = $range;
+                        $dates = [];
+                        for ($date = $start->copy(); $date->lte($end); $date->addDay()) {
+                            $dates[] = $date->toDateString();
+                        }
+                        return $dates;
+                    })
+                )->unique();
+
+                // تحقق إن كل الأيام المطلوبة موجودة في days
+                return $requiredDays->every(fn($day) => $days->contains($day));
+            })->values();
+
+            // $data = $data->filter(function ($service) use ($parsedRanges) {
+            //     $days = json_decode($service->days ?? '[]');
+
+            //     foreach ($days as $dateString) {
+            //         try {
+            //             $day = \Carbon\Carbon::createFromFormat('m/d/Y g:i A', $dateString);
+            //             foreach ($parsedRanges as [$start, $end]) {
+            //                 if ($day->between($start, $end)) {
+            //                     return true;
+            //                 }
+            //             }
+            //         } catch (\Exception $e) {
+            //         }
+            //     }
+
+            //     return false;
+            // })->values(); // Reset keys
+
         }
 
         return $data;
@@ -255,6 +255,79 @@ class PropertiesServices
 
         ];
     }
+    private function check_futures_dates($filters, $service_days)
+    {
+        $filtersApplied = !empty($filters['text']) ||
+            !empty($filters['min_price']) ||
+            !empty($filters['max_price']) ||
+            !empty($filters['min_area']) ||
+            !empty($filters['max_area']) ||
+            !empty($filters['bed']) ||
+            !empty($filters['bath']) ||
+            !empty($filters['living_room']) ||
+            !empty($filters['features']) ||
+            !empty($filters['category_id']) ||
+            !empty($filters['city_id']) ||
+            !empty($filters['property_type']) ||
+            !empty($filters['property']) ||
+            !empty($filters['duration']) ||
+            !empty($filters['range_days']);
+        if ($filtersApplied) {
+            $hasFutureDate = false;
+            $days = json_decode($service_days ?? '[]');
+
+            foreach ($days as $dayStr) {
+                try {
+                    $day = \Carbon\Carbon::createFromFormat('m/d/Y g:i A', $dayStr);
+                    if ($day->isFuture()) {
+                        $hasFutureDate = true;
+                        break;
+                    }
+                } catch (\Exception $e) {
+                    // ignore invalid dates
+                }
+            }
+            return $hasFutureDate;
+        }
+        return true;
+    }
+
+    public function apply_event_days()
+    {
+        // Cache today's date
+        $today = date("m/d/Y");
+
+        // Batch process event days for today
+        $eventDays_of_today_first_time = ServiceEventDays::where('day', $today)->where("status", 0)->get();
+        $eventDays_of_old_todays_sec_time = ServiceEventDays::where('day', '<', $today)->where("status", 1)->get();
+
+        // Use collections for bulk updates
+        if ($eventDays_of_today_first_time->isNotEmpty()) {
+            $todayEvents = $eventDays_of_today_first_time->map(function ($event) {
+                $service = $event->service;
+                $commission_money = (($service->commission_percentage / $event->price) * 100);
+                $service->update([
+                    "price" => $event->price + $commission_money,
+                    'commission_money' => $commission_money,
+                    "provider_money" => $event->price - $commission_money,
+                ]);
+                $event->update(['status' => 1]);
+            });
+        }
+
+        if ($eventDays_of_old_todays_sec_time->isNotEmpty()) {
+            $oldEvents = $eventDays_of_old_todays_sec_time->map(function ($event) {
+                $service = $event->service;
+                $commission_money = (($service->commission_percentage / $service->regular_price) * 100);
+                $service->update([
+                    "price" => $service->regular_price + $commission_money,
+                    'commission_money' => $commission_money,
+                    "provider_money" => $service->regular_price - $commission_money,
+                ]);
+                $event->update(['status' => 2]);
+            });
+        }
+    }
     private function apply_commision($provider_id, $price)
     {
         $commission = Commission::where("provider_id", $provider_id)->first() ?? Setting::find(1);
@@ -266,7 +339,7 @@ class PropertiesServices
                 $commission_money = ($price * $commission_value) / 100;
             else
                 $commission_money =  $commission_value;
-            $provider_money = $price ;
+            $provider_money = $price;
         } else {
             $commission_value = $commission->commission_value;
             $commission_id = 0;
@@ -275,7 +348,7 @@ class PropertiesServices
                 $commission_money = ($price * $commission_value) / 100;
             else
                 $commission_money =  $commission_value;
-            $provider_money = $price  ;
+            $provider_money = $price;
         }
         return [
             'commission_id' => $commission_id,
@@ -284,24 +357,24 @@ class PropertiesServices
             'provider_money' => $provider_money,
         ];
     }
-    public function createService($request, $image, $document, $days)
-    {
+    public function createService($request, $image, $document, $days, $provider_id = null)
 
-        $commissionData = $this->apply_commision($request->user()->id, $request->price);
+    {
+        $commissionData = $this->apply_commision($provider_id, $request->price);
         $service = Service::create([
             'commission_id' => $commissionData['commission_id'],
             "commission_percentage" => $commissionData['commission_value'],
             "commission_money" => $commissionData['commission_money'],
             "provider_money" => $commissionData['provider_money'],
             // added commision to price 
-            "price" => $request->price + $commissionData['commission_money'],
+            "price" => $request->price,
             "regular_price" => $request->price,
             "name" => $request->name_en,
             "name_ar" => $request->name_ar ?? $request->name_en,
             "place" => $request->place_en,
             "place_ar" => $request->place_ar ?? $request->place_en,
             "category_id" => $request->category_id,
-            "user_id" => $request->user()->id,
+            "user_id" => $provider_id,
             "living_room" => $request->living_room,
             "bed" => $request->bed,
             "bath" => $request->bath,
@@ -311,7 +384,7 @@ class PropertiesServices
             "range_days" => (string) ($request->range_days),
             "lat" => $request->latitude,
             "lng" => $request->longitude,
-            "accept" => 2,
+            "accept" => $request->has('accept') ? 1 :  2,
             "image" => "files/$image",
             "document" => "files/$document",
             "city_id" => $request->city_id,

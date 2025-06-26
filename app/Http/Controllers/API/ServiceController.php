@@ -93,7 +93,7 @@ class ServiceController extends Controller
             "document" => "required",
         ],);
         if ($validator->fails())
-            return $this->Response($validator->errors(), "Data Not Valid", 422);
+            return $this->Response($validator->errors(), __("messages.Please_complete_all_required_fields"), 422);
 
         $subscribe = Subscription::where("provider_id", $request->user()->id)
             ->where("status", 1)
@@ -135,7 +135,7 @@ class ServiceController extends Controller
         $document = "2" . time() . str_replace(" ", "_", $request->document->getClientOriginalName());
         $request->document->move(public_path("files/"), $document);
         
-        $service = $this->propertiesServices->createService($request,$image,$document,$days);
+        $service = $this->propertiesServices->createService($request,$image,$document,$days,$request->user()->id);
 
         if (!$service)
             return $this->Response(null, "Service Not Created", 401);
@@ -289,7 +289,7 @@ class ServiceController extends Controller
             "property_size" => $request->property_size ?? $service->property_size,
 
         ]);
-        return $this->Response($service, "Updated Successfully", 201);
+        return $this->Response($service, __("messages.Updated_successfully_under_review"), 201);
     }
     public function add_event_day(Request $request)
     {

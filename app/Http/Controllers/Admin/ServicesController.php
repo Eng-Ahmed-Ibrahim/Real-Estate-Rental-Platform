@@ -156,7 +156,7 @@ class ServicesController extends Controller
         $request->document->move(public_path("files/"), $document);
 
 
-        $service = $this->propertiesServices->createService($request,$image,$document,$days);
+        $service = $this->propertiesServices->createService($request,$image,$document,$days,$request->provider_id);
         
         if ($request->has('event_days') && count(json_decode($request->event_days)) > 0 && $request->event_day_price > 0)
             foreach (json_decode($request->event_days) as $event) {

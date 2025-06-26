@@ -20,7 +20,7 @@ class AuthController extends Controller
             'password'=>"required",
         ]);
         $credentials = $request->only('phone', 'password');
-        $user = User::where('phone', $credentials['phone'])->first();
+        $user = User::where('phone', $credentials['phone'])->orWhere("email",$credentials['phone'])->first();
 
 
         if ($user && Hash::check($credentials['password'], $user->password)) {
