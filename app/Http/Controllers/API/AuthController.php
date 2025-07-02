@@ -52,9 +52,15 @@ class AuthController extends Controller
             $role = "customer";
         elseif ($request->role == 2)
             $role = "provider";
-        $user = User::where("phone", $request->phone)
-            ->orWhere("email", $request->phone)
-            ->where("power", $role)->first();
+
+
+        $user = User::where(function ($query) use ($request) {
+            $query->where("phone", $request->phone)
+                ->orWhere("email", $request->phone);
+        })
+            ->where("power", $role)
+            ->first();
+
 
 
         if (! $user) {
@@ -124,9 +130,13 @@ class AuthController extends Controller
             $role = "provider";
         else
             $role = "customer";
-        $user = User::where("phone", $request->phone)
-            ->orWhere("email", $request->email)
-            ->where("power", $role)->first();
+
+        $user = User::where(function ($query) use ($request) {
+            $query->where("phone", $request->phone)
+                ->orWhere("email", $request->phone);
+        })
+            ->where("power", $role)
+            ->first();
         // return $this->Response($user,"",200);
         if ($user) {
             if ($user->blocked == 1) {

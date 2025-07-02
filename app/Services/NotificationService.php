@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 
 class NotificationService
 {
-    public static function push_notification_user($data)
+    public  function push_notification_user($data)
     {
 
         $fcm = $data['fcm'];
@@ -71,7 +71,7 @@ class NotificationService
             ]);
         }
     }
-    public static function push_notification_owner($data)
+    public  function push_notification_owner($data)
     {
         $fcm = $data['fcm'];
         $title = $data['title'];

@@ -111,7 +111,7 @@
                                             </td>
                                             <td><img src="/{{ $user->image }}" style="height: 60px;" alt=""></td>
                                             <td>{{ $user->phone }}</td>
-                                            <td>{{ $user->power }}</td>
+                                            <td>{{ $user->power == "provider"  ? "Owner" : $user->power }}</td>
                                             <td class="text-center">
                                                 <a
                                                     href="{{ route('admin.profile', $user->id) }}">{{ __('messages.View') }}</a>
@@ -236,17 +236,22 @@
 
                         </div>
                         <div class="row my-2">
-                            <div class="col mb-2">
+                            <div class="col  mb-2">
                                 <input name="email" type="email" class="form-control "
                                     placeholder="{{ __('messages.Email') }}" value="{{ old('email') }}" aria-label="Last name">
                             </div>
                             <div class="col mb-2">
+                                @if(in_array(request('role'), ['provider', 'admin', 'customer']))
+
+                                <input type="hidden" name="power" value="{{ request('role') }}">
+                                @else 
                                 <select required class="form-select" name="power" aria-label="Default select example">
                                     <option selected disabled>{{ __('messages.Permissions') }}</option>
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->name }}" {{ old('power') == $role->name ? 'selected' : '' }}>{{ $role->name }}</option>
+                                    <option value="{{ $role->name }}" {{ old('power') == $role->name ? 'selected' : '' }}>{{ $role->name }}</option>
                                     @endforeach
                                 </select>
+                                @endif
                             </div>
                         </div>
                         <div class="row my-2">

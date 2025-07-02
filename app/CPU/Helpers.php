@@ -76,13 +76,8 @@ class Helpers
         $startDate = $start_at;
         $endDate = $end_at;
 
-
-
         $start = $startDate;
         $end = $endDate;
-
-        // $end->modify('+1 day');
-
         $interval = new DateInterval('P1D');
 
         $datePeriod = new DatePeriod($start, $interval, $end);
@@ -91,15 +86,11 @@ class Helpers
         foreach ($datePeriod as $date) {
             $dates[] = $date->format('m/d/Y');
         }
-
         $eventDays = ServiceEventDays::where("service_id", $service_id)->get();
         $event_days = [];
         $event_days_prices = 0;
         if (count($eventDays) > 0) {
             foreach ($eventDays as $eventDay) {
-                // Convert the event day to the desired format
-
-                // Check if the event date is in the dates array
                 if (($key = array_search($eventDay->day, $dates)) !== false) {
                     $event_days_prices += $eventDay->price;
                     $event_days[] = [

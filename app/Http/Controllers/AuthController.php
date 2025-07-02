@@ -9,30 +9,37 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
 
 
-    public function login(Request $request)  {
+    public function login(Request $request)
+    {
         $request->validate([
-            'phone'=>'required',
-            'password'=>"required",
+            'phone' => 'required',
+            'password' => "required",
         ]);
         $credentials = $request->only('phone', 'password');
-        $user = User::where('phone', $credentials['phone'])->orWhere("email",$credentials['phone'])->first();
+        $user = User::where(function ($query) use ($credentials) {
+                    $query->where("phone",  $credentials['phone'])
+                        ->orWhere("email",  $credentials['phone']);
+                })
+                ->whereNotIn("power", ['customer', 'provider'])
+                ->first();
 
 
         if ($user && Hash::check($credentials['password'], $user->password)) {
-            if($user->power!='provider' && $user->power != "provider"){
-                Auth::login($user);   
+            if ($user->power != 'provider' && $user->power != "provider") {
+                Auth::login($user);
                 return redirect()->route('admin.dashboard');
-            }else{
-                session()->flash('error','Not Allowed To Login ');
+            } else {
+                session()->flash('error', 'Not Allowed To Login ');
                 return back();
             }
         }
-        session()->flash("error","The phone or password is incorrect");
+        session()->flash("error", "The phone or password is incorrect");
         return back();
     }
     public function logout(Request $request)
@@ -43,12 +50,14 @@ class AuthController extends Controller
 
         return redirect('/login')->with('success', 'You have been logged out successfully.');
     }
-    public function forget_password(){
+    public function forget_password()
+    {
         return view('auth.forget_password');
     }
-    public function send_otp(Request $request){
+    public function send_otp(Request $request)
+    {
         $request->validate([
-            'email'=>'required',
+            'email' => 'required',
         ]);
 
         $user = User::where("email", $request->email)->where("power", "admin")->first();
@@ -61,9 +70,10 @@ class AuthController extends Controller
         Helpers::send_otp($user);
         return back()->with('success', 'OTP sent to your email');
     }
-    public function verify_otp(Request $request){
+    public function verify_otp(Request $request)
+    {
         $request->validate([
-            'otp'=>'required',
+            'otp' => 'required',
         ]);
         $user = User::where("email", session('email'))->where("power", "admin")->first();
         if (! $user) {
@@ -73,15 +83,32 @@ class AuthController extends Controller
             session(['step' => 3]);
             session(['otp' => $request->otp]);
             session()->flash('success', 'OTP verified successfully');
-            return back() ;
+            return back();
         } else {
             return back()->with('error', 'Invalid OTP');
         }
     }
-    public function reset_password(Request $request){
+    public function reset_password(Request $request)
+    {
         $request->validate([
-            'new_password'=>'required',
-            'confirm_password'=>'required',
+            'new_password' => [
+                'required',
+                'string',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+            ],
+            'confirm_password' => [
+                'required',
+                'string',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+            ],
         ]);
         $user = User::where("email", session('email'))->where("power", "admin")->first();
         if (! $user) {
@@ -90,7 +117,7 @@ class AuthController extends Controller
         if ($request->new_password != $request->confirm_password) {
             return back()->with('error', 'Passwords do not match');
         }
-        if($user->otp != session('otp')){
+        if ($user->otp != session('otp')) {
             session()->forget('step');
             return redirect()->route('forget_password')->with('error', 'Invalid OTP');
         }

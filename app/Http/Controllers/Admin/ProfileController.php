@@ -25,6 +25,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
 {
@@ -35,7 +36,7 @@ class ProfileController extends Controller
     }
     public function index($id, Request $request)
     {
-        $user = User::where("id",$id)->with(['service'])->first();
+        $user = User::where("id", $id)->with(['service'])->first();
         if (!$user) {
             session()->flash("error", __('Not_found'));
             return back();
@@ -92,18 +93,18 @@ class ProfileController extends Controller
             $total_services = count(Service::where("user_id", $user->id)->get());
             $services = $user->service;
             $ratings  = $user->reviews()->with(['service', 'user'])->orderBy('id', 'DESC')->get();
-            
+
             $commission = Commission::where("provider_id", $user->id)->first() ?? Setting::find(1);
-            
+
             $payment_methods = PaymentMethod::where("status", 1)->get();
-        
+
             $data_withdraw = $user->earning()
                 ->selectRaw('status, SUM(amount) as amount')
                 ->whereIn('status', [1, 2])
                 ->groupBy('status')
                 ->get()
                 ->keyBy('status');
-            
+
             $withdraw_pending = $data_withdraw[2]->amount ?? 0;
             $withdrawn = $data_withdraw[1]->amount ?? 0;
             // $withdraw_pending = WithdrawEarning::where("user_id", $user->id)->where("status", 2)->sum('amount');
@@ -113,11 +114,11 @@ class ProfileController extends Controller
                 return User::select('id', 'name')->where('power', 'customer')->orderBy('id', 'DESC')->get();
             });
 
-            $packages_list=Cache::rememberForever("packages",function(){
-                return Packages::orderBy("id","DESC")->get();
+            $packages_list = Cache::rememberForever("packages", function () {
+                return Packages::orderBy("id", "DESC")->get();
             });
             $calendar_dates = array();
-            $bookings = Booking::where("provider_id", $user->id)->where('payment_status_id', 3)->orderBy("id", "DESC")->with(['customer','service'])->get();
+            $bookings = Booking::where("provider_id", $user->id)->where('payment_status_id', 3)->orderBy("id", "DESC")->with(['customer', 'service'])->get();
             foreach ($bookings as $booking) {
 
                 $service_name = session('lang') == 'en'  ? $booking->service->name :  $booking->service->name_ar;
@@ -278,6 +279,7 @@ class ProfileController extends Controller
             session()->flash("success", __("messages.Updated_successfully"));
             return back();
         } elseif ($request->section == 2) {
+
             $request->validate([
                 'confirmemailpassword' => "required",
                 "phone" => "required|unique:users,phone",
@@ -295,16 +297,33 @@ class ProfileController extends Controller
                 return back();
             }
         } elseif ($request->section == 3) {
+            
             $request->validate([
-                "new_password" => 'required',
-                'confirm_password' => "required",
+                "new_password" => [
+                    'required',
+                    'string',
+                    Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                ],
+                'confirm_password' => [
+                    'required',
+                    'string',
+                    Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                ],
             ]);
             if ($request->new_password != $request->confirm_password) {
                 session()->flash('error', __('messages.Password_not_match'));
                 return back();
             }
             $user->update([
-                "password" => bcrypt($request->new_password),
+                "password" =>  Hash::make($request->new_password),
             ]);
             session()->flash("success", __("messages.Updated_successfully"));
             return back();
@@ -375,22 +394,23 @@ class ProfileController extends Controller
         session()->flash("success", __("messages.Added_successfully"));
         return back();
     }
-    public function add_balance(Request $request){
+    public function add_balance(Request $request)
+    {
         $request->validate([
-            "password"=>"required",
-            "balance"=>"required",
-            "customer_id"=>"required|exists:users,id",
+            "password" => "required",
+            "balance" => "required",
+            "customer_id" => "required|exists:users,id",
         ]);
-        $auth_user =Auth::user();            
+        $auth_user = Auth::user();
         if ($auth_user && Hash::check($request->password, $auth_user->password)) {
-            $customer=User::find($request->customer_id);
+            $customer = User::find($request->customer_id);
             $customer->update([
-                "blance"=>$customer->blance + $request->balance,
+                "blance" => $customer->blance + $request->balance,
             ]);
-            session()->flash("success",__("messages.Added_successfully"));
+            session()->flash("success", __("messages.Added_successfully"));
             return back();
-        }else{
-            session()->flash("error",__("messages.Password_not_match"));
+        } else {
+            session()->flash("error", __("messages.Password_not_match"));
             return back();
         }
     }

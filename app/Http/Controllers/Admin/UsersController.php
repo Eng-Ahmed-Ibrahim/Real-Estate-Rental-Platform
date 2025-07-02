@@ -18,6 +18,11 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $query = User::query();
+        $roles = Role::orderBy("id", "DESC")
+            ->when(request('role') === 'employee', function ($query) {
+                $query->whereNotIn('name', ['admin', 'provider', 'customer']);
+            })
+            ->get();
 
         $user = auth()->user();
 
@@ -54,7 +59,6 @@ class UsersController extends Controller
 
 
         $users = $query->orderBy("id", "DESC")->paginate(15);
-        $roles = Role::orderBy("id", "DESC")->get();
         return view('admin.users.index')
             ->with("users", $users)
             ->with("roles", $roles)
@@ -70,16 +74,16 @@ class UsersController extends Controller
                 "power" => 'required',
                 "phone" => "required|unique:users,phone",
                 'password' => 'required|min:8|confirmed', //password_confirmation
-                            'password' => [
-                'required',
-                'confirmed',
-                'string',
-                Password::min(8)
-                    ->letters()
-                    ->mixedCase()
-                    ->numbers()
-                    ->symbols()
-            ],
+                'password' => [
+                    'required',
+                    'confirmed',
+                    'string',
+                    Password::min(8)
+                        ->letters()
+                        ->mixedCase()
+                        ->numbers()
+                        ->symbols()
+                ],
 
             ],
             [
@@ -87,20 +91,20 @@ class UsersController extends Controller
                 "image.required" => __('messages.Validate_image'),
                 "phone.required" => __('messages.Validate_phone'),
                 "password.required" => __('messages.Validate_password'),
-                        "password.confirmed" => __('messages.Password_confirmation_mismatch'),
+                "password.confirmed" => __('messages.Password_confirmation_mismatch'),
 
             ]
         );
 
 
-        $check = User::where('email', $request->email)->orWhere("phone",$request->phone)
-        ->where('power', $request->power)
-        ->exists();
-        if($check) {
+        $check = User::where('email', $request->email)->orWhere("phone", $request->phone)
+            ->where('power', $request->power)
+            ->exists();
+        if ($check) {
             session()->flash("error", __('messages.Email_or_phone_already_exists'));
             return back();
         }
-        
+
         $user = User::create([
             "name" => $request->name,
             "image" => Helpers::upload_files($request->image),
@@ -109,7 +113,7 @@ class UsersController extends Controller
             "bio" => $request->bio,
             "email" => $request->email,
             "password" => bcrypt($request->password),
-            "email_verified_at"=> Carbon::now(),
+            "email_verified_at" => Carbon::now(),
         ]);
         if ($user->power == 'customer') {
             Cache::forget("customers");

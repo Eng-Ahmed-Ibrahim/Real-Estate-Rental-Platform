@@ -58,6 +58,7 @@ Route::post("/resend-otp", [OtpController::class, 'resend_otp']);
 
 Route::group(['middleware' => ['custom-auth','lang_apis']], function () {
         Route::post('/support', [SupportController::class, 'store']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 
 });
 Route::group(['middleware' => ['custom-auth','lang_apis', 'checkIfBlocked']], function () {
@@ -83,7 +84,6 @@ Route::group(['middleware' => ['custom-auth','lang_apis', 'checkIfBlocked']], fu
 
 
 
-    Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/change-user-language', [SettingsController::class, 'change_local_language']);
 
     Route::get('/settings', [SettingsController::class, 'index']);

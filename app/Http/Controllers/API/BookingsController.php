@@ -172,7 +172,6 @@ class BookingsController extends Controller
     }
     public function index(Request $request)
     {
-
         $pending_bookings = Booking::where("booking_status_id", 1)->get();
         foreach ($pending_bookings as $booking) {
             $createdAt = $booking->created_at;
@@ -241,12 +240,7 @@ class BookingsController extends Controller
                         ;
                     }
                 });
-            // $rental = $query->where("customer_id", $request->user()->id)
 
-            //     ->where("booking_status_id", "!=", 1)
-            //     ->where("booking_status_id", "!=", 2)
-            //     ->orderBy("id", "DESC")->with(["service", 'coupon', "service.user", 'customer', "service.gallery", 'service.eventDays', 'service.features.feature', 'service.review'])
-            //     ->get();
             $rental = [];
             $query2 = Booking::query();
             if ($request->has('booking_status_id')) {
@@ -261,8 +255,7 @@ class BookingsController extends Controller
                     }
                 });
             $upcoming = $query2->where("customer_id", $request->user()->id)
-                // ->where("booking_status_id", "=", 1)
-                // ->orWhere("booking_status_id", "=", 2)
+
                 ->orderBy("id", "DESC")->with(["service", 'coupon', "service.user", 'customer', "service.gallery", 'service.eventDays', 'service.features.feature', 'service.review'])
                 ->get();
             $contact_details = Setting::find(1);
@@ -347,35 +340,27 @@ class BookingsController extends Controller
             return $this->Response($missingDates, __('messages.Days_not_Avaliable'), 422);
         }
 
-
-
-
-
-
-
         // Calculate the difference between the two dates
-        $total = Helpers::get_booking_total_price(Carbon::createFromFormat('m/d/Y', $request->start_at), Carbon::createFromFormat('m/d/Y', $request->end_at), $service->id);
-        //==290
-
+        $amount = Helpers::get_booking_total_price(Carbon::createFromFormat('m/d/Y', $request->start_at), Carbon::createFromFormat('m/d/Y', $request->end_at), $service->id);
 
         $commission = Commission::where("provider_id", $service->user_id)->first() ?? Setting::find(1);
         if ($commission) {
             $commission_value = $commission->commission_value;
             if ($commission->commission_type == "percentage") {
-                $commission_money = (($total * $commission_value) / 100);
+                $commission_money = (($amount * $commission_value) / 100);
             } else {
                 $commission_money =  $commission_value * (count($dates) - 1);
             }
         }
 
 
-        $taxes = $commission_money; // 20 -- 29
-        $amount = $total + $taxes;  // 310 -- 319 / 2 =159.5
+        $taxes = $commission_money; 
+        $total = $amount + $taxes;  
 
 
         $coupon_id = null;
+        $discount_value=0;
         if ($request->filled('coupon_code')) {
-            $total = $total  +  $taxes; // 310
             $coupon = Coupon::where("coupon_code", $request->coupon_code)->first();
             if ($coupon) {
                 $today = date('m/d/Y');
@@ -383,49 +368,38 @@ class BookingsController extends Controller
 
                     $coupon_id = $coupon->id;
                     if ($coupon->type == "amount") {
-                        if ($coupon->coupon_value >= $total) {
-                            $total = 0;
-                            $taxes = 0;
+                        if ($coupon->coupon_value >= $taxes) {
+                            $discount_value = $taxes;
+                            $taxes=0;
                         } else {
-                            $total -= $coupon->coupon_value;
+                            $taxes -= $coupon->coupon_value;
+                            $discount_value = $coupon->coupon_value;
 
-                            // $taxes -=$coupon->coupon_value;
                         }
                     } elseif ($coupon->type == "percentage") {
-                        $total = $total - (($coupon->coupon_value * $total) / 100); // 155 -- 159.5
-                        $taxes = $taxes - (($coupon->coupon_value * $taxes) / 100); // 20->10 -- 29-> 14.5
-
+                        $discount_value = (($coupon->coupon_value * $total) / 100);
+                        $taxes= $discount_value >= $taxes ? 0 : $taxes - $discount_value;
                     }
+                    $total = $amount + $taxes;
+                    
                 }
-                $amount = $total;
-                if ($commission) {
-                    $commission_value = $commission->commission_value;
-                    if ($commission->commission_type == "percentage") {
-                        $commission_money = (($total * $commission_value) / 100);
-                    } else {
-                        $commission_money =  $commission_value * (count($dates) - 1);
-                    }
-                }
-                if ($total > 0) {
-                    $total -=  $commission_money;
-                    if ($coupon->type != "amount")
-                        $total += $taxes;
-                }
+                
             }
         }
 
 
-        $customer = User::find($request->user()->id);
+        $customer = $request->user();
         $settings = Setting::find(1);
 
         $overview_time = $customer->overview_time > 0 ? $customer->overview_time : $settings->overview_time;
         $overview_time_payment = $settings->overview_time_payment;
         $has_partial_option =  $amount < $settings->min_partial_payment ? false : true;
         $data = [
-            "amount" => $total, // before taxes without commission
+            "amount" => $amount, 
             'insurance' => 0,
             "taxes" => $taxes,
-            "total_amount" => $amount,
+            "discount"=>$discount_value,
+            "total_amount" => $total,
             "customer_id" => $customer->id,
             "start_at" => $request->start_at,
             "end_at" => $request->end_at,
@@ -443,8 +417,12 @@ class BookingsController extends Controller
             "has_partial_option" => $has_partial_option,
         ];
 
-        $booking = $this->bookingService->add_booking($data);
-        broadcast(new RequestEvent($booking))->toOthers();
+        try{   
+            $booking = $this->bookingService->add_booking($data);
+            broadcast(new RequestEvent($booking))->toOthers();
+        }catch (Exception $e) {
+            return $this->Response(null, $e->getMessage(), 422);
+        }
 
 
         $service_name = $service->name;
@@ -496,7 +474,12 @@ class BookingsController extends Controller
             return $this->Response(null, "Not Allowed", 403);
         $start = Carbon::parse($booking->start_at)->format('m/d/Y');
         $end = Carbon::parse($booking->end_at)->format('m/d/Y');
-
+        if ($request->booking_status == 4) {
+            $booking->update([
+                "booking_status_id" => 4,
+            ]);
+            return $this->Response($booking, "Updated Successfully", 201);
+        }
         if ($request->booking_status == 3) {
             $overlapExists = Booking::where('id', '!=', $booking->id)
                 ->where('service_id', $booking->service_id)
@@ -532,20 +515,16 @@ class BookingsController extends Controller
             "payment_plan" => $request->payment_plan,
             "down_payment" => $down_payment,
         ]);
+        $key = match ($booking->booking_status_id) {
+            1 => 'status_pending',
+            2 => 'status_in_process',
+            3 => 'status_approved',
+            default => 'status_rejected',
+        };
 
-        if ($booking->booking_status_id == 1) {
-            $booking_status_en = __('messages.status_pending', [], 'en');
-            $booking_status_ar = __('messages.status_pending', [], 'ar');
-        } else if ($booking->booking_status_id == 2) {
-            $booking_status_en = __('messages.status_in_process', [], 'en');
-            $booking_status_ar = __('messages.status_in_process', [], 'ar');
-        } else if ($booking->booking_status_id == 3) {
-            $booking_status_en = __('messages.status_approved', [], 'en');
-            $booking_status_ar = __('messages.status_approved', [], 'ar');
-        } else if ($booking->booking_status_id == 4) {
-            $booking_status_en = __('messages.status_rejected', [], 'en');
-            $booking_status_ar = __('messages.status_rejected', [], 'ar');
-        }
+        $booking_status_en = __("messages.$key", [], 'en');
+        $booking_status_ar = __("messages.$key", [], 'ar');
+
         $notification_title_en = __('messages.booking_status_title', [], 'en');
         $notification_title_ar = __('messages.booking_status_title', [], 'ar');
         $notification_description_en = __('messages.booking_status_changed', ['booking_status' => $booking_status_en], 'en');
@@ -635,22 +614,20 @@ class BookingsController extends Controller
                 'booking_id' => $booking->id,
             ]);
         }
-        $payment_status_en = '';
-        $payment_status_ar = '';
 
-        if ($request->status == 1) {
-            $payment_status_en = "Unpaid";
-            $payment_status_ar = "غير مدفوع";
-        } elseif ($request->status == 2) {
-            $payment_status_en = "Pending";
-            $payment_status_ar = "قيد الانتظار";
-        } elseif ($request->status == 3) {
-            $payment_status_en = "Paid";
-            $payment_status_ar = "مدفوع";
-        } elseif ($request->status == 4) {
-            $payment_status_en = "Partial payment";
-            $payment_status_ar = "دفع جزئي";
-        }
+        $payment_status_en = match ($request->status) {
+            1 => 'Unpaid',
+            2 => 'Pending',
+            3 => 'Paid',
+            default => 'Partial payment',
+        };
+        $payment_status_ar = match ($request->status) {
+            1 => 'غير مدفوع',
+            2 => 'قيد الانتظار',
+            3 => 'مدفوع',
+            default => 'دفع جزئي',
+        };
+
 
         // عناوين الإشعار ثابتة (مش من messages)
         $notification_title_en = "Payment Status";

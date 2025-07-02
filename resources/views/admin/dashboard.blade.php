@@ -3,14 +3,16 @@
 @section('css')
     <style>
         /* canvas {
-          width: 100% !important;
-          height: auto !important;
-         } */
+              width: 100% !important;
+              height: auto !important;
+             } */
 
 
-         body , html{
-            overflow-x:  hidden !important ; 
-         }
+        body,
+        html {
+            overflow-x: hidden !important;
+        }
+
         main {
             width: 100%;
             min-height: 300px;
@@ -223,7 +225,8 @@
         tr:hover {
             transform: scale(1.1);
         }
-        .card-body{
+
+        .card-body {
             overflow: hidden !important;
         }
     </style>
@@ -277,8 +280,7 @@
                                 <!--end::Icon-->
 
                                 <!--begin::Section-->
-                                <a 
-                                    class="d-flex flex-column my-7 w-100">
+                                <a class="d-flex flex-column my-7 w-100">
                                     <!--begin::Number-->
                                     <span class="fw-semibold fs-3x text-gray-800  text-center lh-1 ls-n2"
                                         style="font-family: 'Bahij', sans-serif !important;">{{ $total_customers }}</span>
@@ -288,7 +290,7 @@
                                     <div class="m-0  " style="text-align: left;">
                                         <span class="fw-semibold fs-6 text-gray-500"
                                             style="text-align: left;font-size:12px;font-family: 'Bahij', sans-serif !important;">
-                                            {{ __("messages.Total_customers") }}</span>
+                                            {{ __('messages.Total_customers') }}</span>
 
                                     </div>
                                     <!--end::Follower-->
@@ -401,7 +403,7 @@
                                 <div id="leaderboard" class="card-body">
                                     <table>
 
-                                        <tr>
+                                        <tr style="transform: scale(1)">
 
                                             <td class="name text-right text-gray-800 ">
                                                 {{ __('messages.Customer') }}
@@ -450,7 +452,7 @@
                                 <div id="leaderboard" class="card-body">
                                     <table>
 
-                                        <tr>
+                                        <tr style="transform: scale(1)">
 
                                             <td class="name text-right text-gray-800 ">
                                                 {{ __('messages.Property') }}
@@ -504,14 +506,16 @@
 
                                 <div class="card">
 
-                                    <div id="adminTotal" class="card-body" style="overflow:hidden;padding: 10px;margin-right: 20px; ">
+                                    <div id="adminTotal" class="card-body"
+                                        style="overflow:hidden;padding: 10px;margin-right: 20px; ">
                                         <div> <span class="currency">{{ __('messages.EGP') }}</span> <span
                                                 class="total">{{ $currentMonthEarnings['admin'] }}</span> </div>
                                         <div>{{ __('messages.Admin_Earning') }}</div>
                                     </div>
                                 </div>
                                 <div class="card mx-2">
-                                    <div id="providerTotal" class="card-body" style=" overflow:hidden;   padding: 10px;margin-right: 10px; ">
+                                    <div id="providerTotal" class="card-body"
+                                        style=" overflow:hidden;   padding: 10px;margin-right: 10px; ">
                                         <div> <span class="currency">{{ __('messages.EGP') }}</span> <span
                                                 class="total">{{ $currentMonthEarnings['provider'] }}</span> </div>
                                         <div>{{ __('messages.Provider_Earning') }}</div>

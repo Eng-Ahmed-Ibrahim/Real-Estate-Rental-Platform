@@ -229,7 +229,6 @@
 								<th class="min-w-100px">{{__('messages.Start_at')}}</th>
 								<th class="min-w-100px">{{__('messages.End_at')}}</th>
 								<th class="min-w-150px">{{__('messages.Actions')}}</th>
-
 							</tr>
 						</thead>
 
