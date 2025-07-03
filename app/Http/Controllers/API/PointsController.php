@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class PointsController extends Controller
@@ -35,9 +35,9 @@ class PointsController extends Controller
         $minimumPoints = Setting::find(1)->minimum_point_required;
 
         if($convert_points > $points){
-            return $this->Response(null, 'You do not have enough points to convert to balance', 400);
+            return $this->Response(null, 'You do not have enough points to convert to balance', 422);
         }
-        if ($user->points <= $minimumPoints) {
+        if ($points < $minimumPoints) {
             $message = "You must have at least $minimumPoints points.";
             return $this->Response(null, $message, 400);
         }

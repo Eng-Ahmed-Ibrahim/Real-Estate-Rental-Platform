@@ -104,18 +104,23 @@
                         @csrf
                         <div class="row">
                             <div class="col">
+                                <label for="name_en">{{ __('messages.Name_en') }}</label>
                                 <input required name="name_en" type="text" class="form-control"
                                     placeholder="{{ __('messages.Name_en') }}" aria-label="First name">
                             </div>
                             <div class="col">
-                                <input required name="name_ar" type="text" class="form-control"
+                                                                <label for="edit_name_ar">{{ __('messages.Name_ar') }}</label>
+
+                                <input required name="name_ar" id="edit_name_ar" type="text" class="form-control"
                                     placeholder="{{ __('messages.Name_ar') }}" aria-label="Last name">
                             </div>
 
                         </div>
                         <div class="row my-2">
                             <div class="col">
-                                <input required name="image" type="file" class="form-control"
+                                <label for="image">{{ __('messages.Image') }} <small>(60*60) * <strong>PNG, JPG, JPEG, WEBP, GIF, SVG</strong></small> </label>
+
+                                <input required name="image" id="image" type="file" class="form-control"
                                     placeholder="{{ __('messages.image') }}">
                             </div>
                         </div>
@@ -142,11 +147,13 @@
                         <input type="text" name="id" class="category_id" hidden>
                         <div class="row">
                             <div class="col">
-                                <input required name="name_en" type="text" class="form-control name_en"
+                                <label for="edit_name_en">{{ __('messages.Name_en') }}</label>
+                                <input required name="name_en" type="text" id="edit_name_en" class="form-control name_en"
                                     placeholder="{{ __('messages.Name_en') }}" aria-label="First name">
                             </div>
                             <div class="col">
-                                <input required name="name_ar" type="text" class="form-control name_ar"
+                                                                <label for="edit_name_ar">{{ __('messages.Name_ar') }}</label>
+                                <input required name="name_ar" type="text" id="edit_name_ar" class="form-control name_ar"
                                     placeholder="{{ __('messages.Name_ar') }}" aria-label="Last name">
                             </div>
 
@@ -157,7 +164,7 @@
                                     <img src="" id="image-preview" style="height: 70px ; width:70px"
                                         alt="">
                                 </div>
-                                <label for="EditImage">{{ __('messages.Image') }} (60*60)</label>
+                                <label for="EditImage">{{ __('messages.Image') }} <small>(60*60) * <strong>PNG, JPG, JPEG, WEBP, GIF, SVG</strong></small> </label>
                                 <input name="image" id="EditImage" type="file" class="form-control  "
                                     placeholder="{{ __('messages.image') }}">
                             </div>

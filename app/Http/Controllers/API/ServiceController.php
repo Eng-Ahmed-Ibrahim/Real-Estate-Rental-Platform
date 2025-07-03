@@ -65,7 +65,9 @@ class ServiceController extends Controller
     }
     public function service(Request $request)
     {
-        $service = Service::where("user_id", $request->user()->id)->where("id", $request->service_id)->with(['booking', 'features', 'gallery', 'review', 'user'])->first();
+        $service = Service::where("user_id", $request->user()->id)->where("id", $request->service_id)
+        ->with(['booking', 'features', 'gallery', 'review', 'user'])
+        ->first();
         if (!$service)
             return $this->Response(null, "Not Allowed ", 403);
         return $this->Response($service, "Service", 201);

@@ -80,6 +80,10 @@ class ApiController extends Controller
         $best_deals = Cache::rememberForever('best_deals', function () {
             return Service::where("is_best_deal", true)->inRandomOrder()->get();
         });
+        $best_deals = $best_deals->map(function ($service) {
+            $service->price = ($service->price ?? 0) + ($service->commission_money ?? 0);
+            return $service;
+        });
         $data = [
             "categories" => $categories,
             "best_deals" => $best_deals,
@@ -137,6 +141,10 @@ class ApiController extends Controller
         $best_deals = Cache::rememberForever('best_deals', function () {
             return Service::where("is_best_deal", true)->inRandomOrder()->get();
         });
+        $best_deals = $best_deals->map(function ($service) {
+            $service->price = ($service->price ?? 0) + ($service->commission_money ?? 0);
+            return $service;
+        });
         $data = [
             "categories" => $categories,
             "best_deals" => $best_deals,
@@ -170,9 +178,14 @@ class ApiController extends Controller
         ]);
         if ($validator->fails())
             return $this->Response($validator->errors(), "Data Not Valid", 422);
-        $service = Service::where("id", $request->service_id)->with(['user', 'eventDays', 'gallery', 'features.feature'])->first();
+        $service = Service::where("id", $request->service_id)
+            ->with(['user', 'eventDays', 'gallery', 'features.feature'])
+            ->first();
         if (!$service)
             return $this->Response(null, "not found", 404);
+
+        $service->price = ($service->price ?? 0) + ($service->commission_money ?? 0);
+
         $contact_details = Setting::find(1);
 
         $data = [

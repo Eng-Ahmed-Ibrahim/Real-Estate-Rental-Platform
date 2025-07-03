@@ -176,15 +176,15 @@ class BookingsController extends Controller
     }
     public function index(Request $request)
     {
-        // Overflow Time Function
+        // Overdue Time Function
         $this->bookingService->OverdueTime();
-        
+        // Overdue Payment Time
         $this->bookingService->OverduePaymentTime();
         
 
 
 
-        if ($request->user()->power == 'provider' || $request->user()->power == 'admin') {
+        if ($request->user()->power == 'provider') {
 
             $today = date("Y-m-d H:i:s");
             $query = Booking::query();
@@ -1053,7 +1053,7 @@ class BookingsController extends Controller
 
                 // return full refund
                 $refund_blacnce = 0;
-                if ($hoursDifference > $setting->refund_full_amount_within_hours) {
+                if ($hoursDifference <= $setting->refund_full_amount_within_hours) {
                     $amount = $booking->payment_status_id == 4 ?  $booking->down_paid :  $booking->total_amount;
                     $refund_blacnce = round($amount);
                     $message = __("messages.Cancelled_successfully", ["refund" => $refund_blacnce, "deduct_amount" => 0]);
@@ -1081,13 +1081,13 @@ class BookingsController extends Controller
                     $earning->update([
                         "is_cancelled" => true,
                     ]);
-                    Helpers::add_days_after_cancel_request($booking->id);
                 }
+                Helpers::add_days_after_cancel_request($booking->id);
                 $booking->update([
                     'booking_status_id' => 5,
                 ]);
     
-                return $this->Response(null, __('messages.Cancelled_b_successfully'), 201);
+                return $this->Response(null, $message, 201);
         } else {
             return $this->Response(null, __('messages.Not_allowed_to_cancel_booking'), 422);
         }

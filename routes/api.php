@@ -28,6 +28,7 @@ Route::post('/check-email', [AuthController::class, 'check_email']);
 Route::post('/reset-password', [AuthController::class, 'reset_password']);
 
 Route::get('/guest-user', [ApiController::class, 'guest_user']);
+Route::get('/reviews', [ReviewsController::class, 'reviews']);
 
 Route::get('/home-sliders', [ApiController::class, 'sliders']);
 
@@ -123,7 +124,6 @@ Route::group(['middleware' => ['custom-auth','lang_apis', 'checkIfBlocked']], fu
 
 
 
-    Route::get('/reviews', [ReviewsController::class, 'reviews']);
     Route::post('/add-review', [ReviewsController::class, 'add_review']);
 
     Route::post('set-location', [ApiController::class, 'setLocation']);

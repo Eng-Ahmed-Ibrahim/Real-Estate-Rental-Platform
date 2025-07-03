@@ -7,22 +7,33 @@ use Exception;
 use DatePeriod;
 use DateInterval;
 use Carbon\Carbon;
+use App\Models\FCM;
+use App\CPU\Helpers;
 use App\Models\Coupon;
 use App\Models\Booking;
 use App\Models\Service;
+use App\Models\Setting;
 use App\Models\ServiceEventDays;
 use Illuminate\Support\Facades\DB;
+use App\Services\NotificationService;
 use App\Http\Controllers\API\ResponseTrait;
 
 class BookingServices
 {
     use ResponseTrait;
+    protected $notificationService;
+
+    public function __construct(NotificationService $notificationService)
+    {
+        $this->notificationService = $notificationService;
+    }
     public function add_booking($data)
     {
 
+        $setting=Setting::find(1);
         $booking = Booking::create([
             "amount" => $data['amount'],
-            'discount'=>$data['discount'],
+            'discount' => $data['discount'],
             'insurance' => 0,
             "taxes" => $data['taxes'],
             "total_amount" => $data['total_amount'],
@@ -41,6 +52,7 @@ class BookingServices
             "overview_time" => $data['overview_time'],
             "overview_time_payment" => $data['overview_time_payment'],
             "has_partial_option" => $data['has_partial_option'],
+            "cancel_within_hours"=>$setting->cancel_within_hours,
 
         ]);
         return $booking;
@@ -70,7 +82,7 @@ class BookingServices
         return $conflictingBooking;
     }
 
-    
+
     public  function get_booking_total_price(DateTime  $start_at, DateTime  $end_at, $service_id)
     {
         $service = Service::find($service_id);
@@ -106,5 +118,57 @@ class BookingServices
         $total = $event_days_prices + $prices_normal_day;
 
         return $total;
+    }
+
+    public function OverdueTime()
+    {
+        $pending_bookings = Booking::where("booking_status_id", 1)->get();
+        foreach ($pending_bookings as $booking) {
+            $createdAt = $booking->created_at;
+            $time = $booking->overview_time; // The number of hours to subtract
+            $timeToCompare = $createdAt->addHours($time); //  addHours
+            if (now()->greaterThanOrEqualTo($timeToCompare)) {
+                $booking->update([
+                    "booking_status_id" => 6,
+                ]);
+                $title_en = "Overdue Time";
+                $title_ar = " الوقت المستحق";
+                $description_en = "Your booking request expired due to no response in time.";
+                $description_ar = "انتهت صلاحية طلب الحجز بسبب عدم الرد في الوقت المحدد.";
+                $this->notificationService->send($title_en,$title_ar,$description_en,$description_ar,$booking->customer_id,$booking->service_id,2);
+                $this->notificationService->send($title_en,$title_ar,$description_en,$description_ar,$booking->provider_id,$booking->service_id,2);
+
+            }
+        }
+    }
+    public function OverduePaymentTime()
+    {
+        $approved_bookings = Booking::where("booking_status_id", 3)
+        ->where('payment_method_id', null)
+        ->where("payment_status_id", 2)
+        ->get();
+        foreach ($approved_bookings as $booking) {
+            if ($booking->approved_at != null) {
+
+                $approved_at = Carbon::parse($booking->approved_at); // 2024-08-22 12:37:22
+                $time = $booking->overview_time_payment; // 10
+
+                $timeToCompare = $approved_at->addHours($time); // addMinutes
+
+                if (now()->greaterThanOrEqualTo($timeToCompare)) {
+                    $booking->update([
+                        "booking_status_id" => 7,
+                    ]);
+                    $title_en = "Overdue Payment Time";
+                    $title_ar = "دفع متأخر";
+                    $description_en = "Your booking was cancelled because the payment was not completed within the required time.";
+                    $description_ar = "تم إلغاء الحجز لعدم إتمام عملية الدفع خلال الوقت المحدد.";
+                    
+                    $this->notificationService->send($title_en,$title_ar,$description_en,$description_ar,$booking->customer_id,$booking->service_id,2);
+                    $this->notificationService->send($title_en,$title_ar,$description_en,$description_ar,$booking->provider_id,$booking->service_id,2);
+
+                }
+            }
+        }
     }
 }
