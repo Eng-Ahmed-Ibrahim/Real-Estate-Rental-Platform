@@ -28,15 +28,19 @@ use App\Services\BookingServices;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
+use App\Services\NotificationService;
 use Illuminate\Support\Facades\Validator;
 
 class BookingsController extends Controller
 {
     use ResponseTrait;
     private $bookingService;
-    function __construct(BookingServices $bookingService)
+    private $notificationService;
+    function __construct(NotificationService $notificationService ,BookingServices $bookingService)
     {
         $this->bookingService = $bookingService;
+                $this->notificationService = $notificationService;
+
     }
     public function ProviderServices(Request $request)
     {
@@ -172,34 +176,12 @@ class BookingsController extends Controller
     }
     public function index(Request $request)
     {
-        $pending_bookings = Booking::where("booking_status_id", 1)->get();
-        foreach ($pending_bookings as $booking) {
-            $createdAt = $booking->created_at;
-            $time = $booking->overview_time; // The number of hours to subtract
-            $timeToCompare = $createdAt->addHours($time); //  addHours
-            if (now()->greaterThanOrEqualTo($timeToCompare)) {
-                $booking->update([
-                    "booking_status_id" => 6,
-                ]);
-                // $booking->delete();
-            }
-        }
-        $approved_bookings = Booking::where("booking_status_id", 3)->where('payment_method_id', null)->where("payment_status_id", 2)->get();
-        foreach ($approved_bookings as $booking) {
-            if ($booking->approved_at != null) {
+        // Overflow Time Function
+        $this->bookingService->OverdueTime();
+        
+        $this->bookingService->OverduePaymentTime();
+        
 
-                $approved_at = Carbon::parse($booking->approved_at); // 2024-08-22 12:37:22
-                $time = $booking->overview_time_payment; // 10
-
-                $timeToCompare = $approved_at->addHours($time); // addMinutes
-
-                if (now()->greaterThanOrEqualTo($timeToCompare)) {
-                    $booking->update([
-                        "booking_status_id" => 7,
-                    ]);
-                }
-            }
-        }
 
 
         if ($request->user()->power == 'provider' || $request->user()->power == 'admin') {
@@ -429,35 +411,14 @@ class BookingsController extends Controller
         $service_name_ar = $service->name_ar;
         $customer_name = $customer->name;
 
-        $fcms = FCM::where("user_id", $service->user_id)->get();
-        $notification_data = [];
-        $notification_title_en = __('messages.new_request_title', ['service_name' => $service_name], 'en');
-        $notification_title_ar = __('messages.new_request_title', ['service_name' => $service_name_ar], 'ar');
-        $notification_description_en = __('messages.new_request_description', ['customer_name' => $customer_name], 'en');
-        $notification_description_ar = __('messages.new_request_description', ['customer_name' => $customer_name], 'ar');
 
+        $title_en = __('messages.new_request_title', ['service_name' => $service_name], 'en');
+        $title_ar = __('messages.new_request_title', ['service_name' => $service_name_ar], 'ar');
+        $description_en = __('messages.new_request_description', ['customer_name' => $customer_name], 'en');
+        $description_ar = __('messages.new_request_description', ['customer_name' => $customer_name], 'ar');
 
-        $lang = $customer->lang;
-        foreach ($fcms as $fcm) {
-            $notification_data = [
-                "title" => $lang == 'en' ? $notification_title_en : $notification_title_ar,
-                "description" =>  $lang == 'en' ? $notification_description_en : $notification_description_ar,
-                'fcm' => $fcm->fcm_token,
-                'model_id' => $booking->service_id,
-                'model_type' => 2,
-                "fcm" => $fcm->fcm_token,
-            ];
-            Helpers::push_notification_owner($notification_data);
-        }
+        $this->notificationService->send($title_en,$title_ar,$description_en,$description_ar,$service->user_id,$booking->service_id,2);
 
-        $notification_data["title_ar"] = $notification_title_ar;
-        $notification_data["title_en"] = $notification_title_en;
-        $notification_data["description_en"] = $notification_description_en;
-        $notification_data["description_ar"] = $notification_description_ar;
-        $notification_data['model_type'] = 2;
-        $notification_data['model_id'] = $booking->service_id;
-        $notification_data['user_id'] = $service->user_id;
-        Helpers::push_notification_list($notification_data);
         return $this->Response($booking, "Added Successfully", 201);
     }
     public function changeBookingStatus(Request $request)
@@ -527,30 +488,13 @@ class BookingsController extends Controller
         $booking_status_en = __("messages.$key", [], 'en');
         $booking_status_ar = __("messages.$key", [], 'ar');
 
-        $notification_title_en = __('messages.booking_status_title', [], 'en');
-        $notification_title_ar = __('messages.booking_status_title', [], 'ar');
-        $notification_description_en = __('messages.booking_status_changed', ['booking_status' => $booking_status_en], 'en');
-        $notification_description_ar = __('messages.booking_status_changed', ['booking_status' => $booking_status_ar], 'ar');
+        $title_en = __('messages.booking_status_title', [], 'en');
+        $title_ar = __('messages.booking_status_title', [], 'ar');
+        $description_en = __('messages.booking_status_changed', ['booking_status' => $booking_status_en], 'en');
+        $description_ar = __('messages.booking_status_changed', ['booking_status' => $booking_status_ar], 'ar');
 
-        $fcms = FCM::where("user_id", $booking->customer_id)->get();
-        foreach ($fcms as $fcm) {
-            $notification_data = [
-                "title" => $booking->customer->lang == "en" ? $notification_title_en : $notification_title_ar,
-                "description" => $booking->customer->lang == "en" ?  $notification_description_en :  $notification_description_ar,
-                'fcm' => $fcm->fcm_token,
-                'model_id' => $booking->service_id,
-                "model_type" => 2,
-            ];
-            Helpers::push_notification_user($notification_data);
-        }
-        $notification_data["title_ar"] = $notification_title_ar;
-        $notification_data["title_en"] = $notification_title_en;
-        $notification_data["description_en"] = $notification_description_en;
-        $notification_data["description_ar"] = $notification_description_ar;
-        $notification_data['user_id'] = $booking->customer_id;
-        $notification_data['model_type'] = 2;
-        $notification_data['model_id'] = $booking->service_id;
-        Helpers::push_notification_list($notification_data);
+        $this->notificationService->send($title_en,$title_ar,$description_en,$description_ar,$booking->customer_id,$booking->service_id,2);
+
 
         return $this->Response($booking, "Updated Successfully", 201);
     }
@@ -632,35 +576,14 @@ class BookingsController extends Controller
 
 
         // عناوين الإشعار ثابتة (مش من messages)
-        $notification_title_en = "Payment Status";
-        $notification_title_ar = "حالة الدفع";
+        $title_en = "Payment Status";
+        $title_ar = "حالة الدفع";
+        $description_en = "Payment status changed to: {$payment_status_en}";
+        $description_ar = "تم تغيير حالة الدفع إلى: {$payment_status_ar}";
 
-        $notification_description_en = "Payment status changed to: {$payment_status_en}";
-        $notification_description_ar = "تم تغيير حالة الدفع إلى: {$payment_status_ar}";
-
-        $fcms = FCM::where("user_id", $booking->customer_id)->get();
-
-        foreach ($fcms as $fcm) {
-            $notification_data = [
-                "title" => $booking->customer->lang === "en" ? $notification_title_en : $notification_title_ar,
-                "description" => $booking->customer->lang === "en" ? $notification_description_en : $notification_description_ar,
-                'fcm' => $fcm->fcm_token,
-                'model_id' => $booking->service_id,
-                "model_type" => 2,
-            ];
-
-            Helpers::push_notification_user($notification_data);
-        }
+        $this->notificationService->send($title_en,$title_ar,$description_en,$description_ar,$booking->customer_id,$booking->service_id,2);
 
 
-        $notification_data["title_ar"] = $notification_title_ar;
-        $notification_data["title_en"] = $notification_title_en;
-        $notification_data["description_en"] = $notification_description_en;
-        $notification_data["description_ar"] = $notification_description_ar;
-        $notification_data['model_type'] = 2;
-        $notification_data['model_id'] = $booking->service_id;
-        $notification_data['user_id'] = $booking->customer_id;
-        Helpers::push_notification_list($notification_data);
         $booking->update([
             "payment_status_id" => $request->status,
         ]);
@@ -744,35 +667,13 @@ class BookingsController extends Controller
 
                 // Prepare notification data
                 $customer_name = $request->user()->name;
-                $fcms = FCM::where("user_id", $booking->provider_id)->get();
 
-                $notification_title_en = __('messages.file_uploaded_title', ['customer_name' => $customer_name], 'en');
-                $notification_title_ar = __('messages.file_uploaded_title', ['customer_name' => $customer_name], 'ar');
-                $notification_description_en = __('messages.money_transferred_title', ['customer_name' => $customer_name], 'en');
-                $notification_description_ar = __('messages.money_transferred_title', ['customer_name' => $customer_name], 'ar');
+                $title_en = __('messages.file_uploaded_title', ['customer_name' => $customer_name], 'en');
+                $title_ar = __('messages.file_uploaded_title', ['customer_name' => $customer_name], 'ar');
+                $description_en = __('messages.money_transferred_title', ['customer_name' => $customer_name], 'en');
+                $description_ar = __('messages.money_transferred_title', ['customer_name' => $customer_name], 'ar');
 
-                $lang = $booking->provider->lang;
-
-                foreach ($fcms as $fcm) {
-                    $notification_data = [
-                        "title" => $lang == 'en' ? $notification_title_en :  $notification_title_ar,
-                        "description" => $lang == 'en' ? $notification_description_en :  $notification_description_ar,
-                        "fcm" => $fcm->fcm_token ?? ' ',
-                        'model_id' => $booking->service_id,
-                        "model_type" => 2,
-                    ];
-                    Helpers::push_notification_owner($notification_data);
-                }
-
-                // Store the notification in a list
-                $notification_data["title_ar"] = $notification_title_ar;
-                $notification_data["title_en"] = $notification_title_en;
-                $notification_data["description_en"] = $notification_description_en;
-                $notification_data["description_ar"] = $notification_description_ar;
-                $notification_data['user_id'] = $booking->provider_id;
-                $notification_data['model_type'] = 2;
-                $notification_data['model_id'] = $booking->service_id;
-                Helpers::push_notification_list($notification_data);
+                $this->notificationService->send($title_en,$title_ar,$description_en,$description_ar,$booking->provider_id,$booking->service_id,2);
 
                 return $this->Response($booking, "Uploaded Successfully", 201);
             } else {
@@ -936,38 +837,13 @@ class BookingsController extends Controller
                 // Commit the transaction if all operations succeed
                 DB::commit();
 
-                // Prepare notification data
-                $customer_name = $request->user()->name;
-                $fcms = FCM::where("user_id", $booking->provider_id)->get();
 
-                $notification_title_en = "Payment ";
-                $notification_title_ar = "دفع";
-                $notification_description_en = "$user->name paid the reservation via the wallet";
-                $notification_description_ar = "$user->name دفع الحجز عبر المحفظة";
 
-                $provider = $booking->provider;
-                $lang = $provider->lang;
-
-                foreach ($fcms as $fcm) {
-                    $notification_data = [
-                        "title" => $lang == 'en' ? $notification_title_en :  $notification_title_ar,
-                        "description" => $lang == 'en' ? $notification_description_en :  $notification_description_ar,
-                        "fcm" => $fcm->fcm_token ?? ' ',
-                        'model_id' => $booking->service_id,
-                        "model_type" => 2,
-                    ];
-                    Helpers::push_notification_owner($notification_data);
-                }
-
-                // Store the notification in a list
-                $notification_data["title_ar"] = $notification_title_ar;
-                $notification_data["title_en"] = $notification_title_en;
-                $notification_data["description_en"] = $notification_description_en;
-                $notification_data["description_ar"] = $notification_description_ar;
-                $notification_data['user_id'] = $booking->provider_id;
-                $notification_data['model_type'] = 2;
-                $notification_data['model_id'] = $booking->service_id;
-                Helpers::push_notification_list($notification_data);
+                $title_en = "Payment ";
+                $title_ar = "دفع";
+                $description_en = "$user->name paid the reservation via the wallet";
+                $description_ar = "$user->name دفع الحجز عبر المحفظة";
+                $this->notificationService->send($title_en,$title_ar,$description_en,$description_ar,$booking->provider_id,$booking->service_id,2);
 
                 return $this->Response($booking, "Paid Successfully", 201);
             } else {

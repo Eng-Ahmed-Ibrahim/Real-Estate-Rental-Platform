@@ -36,7 +36,8 @@ class ApiController extends Controller
     {
         $this->propertiesServices = $propertiesServices;
     }
-    public function guest_user(Request $request){
+    public function guest_user(Request $request)
+    {
         $this->propertiesServices->apply_event_days();
 
         $categories = Cache::rememberForever('categories', function () {
@@ -54,7 +55,7 @@ class ApiController extends Controller
             "living_room" => $request->living_room,
             "lat" => $request->lat,
             "long" => $request->long,
-            "user"=>null,
+            "user" => null,
             "highest_price" => $request->highest_price,
             "lowest_price" => $request->lowest_price,
             "accept" => $request->accept,
@@ -91,13 +92,14 @@ class ApiController extends Controller
             ],
         ];
 
- 
+
 
         return $this->Response($data, "Data", 201);
     }
-    public function home(Request $request){
+    public function home(Request $request)
+    {
 
-        // $this->propertiesServices->apply_event_days();
+        $this->propertiesServices->apply_event_days();
 
         $categories = Cache::rememberForever('categories', function () {
             return Categories::all();
@@ -129,9 +131,6 @@ class ApiController extends Controller
 
         ];
         $services = $this->propertiesServices->getProperties($filters);
-
-
-
         $contact_details = Cache::rememberForever('contact_details', function () {
             return Setting::find(1);
         });
@@ -151,14 +150,12 @@ class ApiController extends Controller
         ];
 
         if ($request->user()->power == 'provider') {
-
             $user_earning = Earning::where("user_id", $request->user()->id)
                 ->where("is_cancelled", 0)
                 ->sum('provider_earning');
-
             $report = [
-                "total_earnings" =>(int) $user_earning,
-                "total_booking" => Booking::where("provider_id", $request->user()->id)->where("booking_status_id",3)->where("payment_status_id",3)->count(),
+                "total_earnings" => (int) $user_earning,
+                "total_booking" => Booking::where("provider_id", $request->user()->id)->where("booking_status_id", 3)->where("payment_status_id", 3)->count(),
                 "total_services" => Service::where("user_id", $request->user()->id)->count(),
             ];
             $data['report'] = $report;
@@ -166,9 +163,6 @@ class ApiController extends Controller
 
         return $this->Response($data, "Data", 201);
     }
-
-
-
     public function service(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -252,12 +246,18 @@ class ApiController extends Controller
             MAX(property_size) as max_property_size,
             MIN(property_size) as min_property_size
         ')->first();
+
+        // تحقق من التساوي وخلي min = 0 لو متساويين
+        $min_price = $query->min_price == $query->max_price ? 0 : $query->min_price;
+        $min_property_size = $query->min_property_size == $query->max_property_size ? 0 : $query->min_property_size;
+
         $data = [
             "max_price" => $query->max_price,
-            "min_price" => $query->min_price,
+            "min_price" => $min_price,
             "max_property_size" => $query->max_property_size,
-            "min_property_size" => $query->min_property_size,
+            "min_property_size" => $min_property_size,
         ];
+
         return $this->Response($data, "Price", 201);
     }
     public function cities()
@@ -267,7 +267,7 @@ class ApiController extends Controller
     }
     public function sliders()
     {
-        $sliders = Cache::rememberForever('sliders',function(){
+        $sliders = Cache::rememberForever('sliders', function () {
             return Sliders::orderBy("id", "DESC")->get();
         });
         return $this->Response($sliders, "sliders", 201);
