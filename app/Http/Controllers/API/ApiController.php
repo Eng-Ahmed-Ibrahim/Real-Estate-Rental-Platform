@@ -54,6 +54,7 @@ class ApiController extends Controller
             "living_room" => $request->living_room,
             "lat" => $request->lat,
             "long" => $request->long,
+            "user"=>null,
             "highest_price" => $request->highest_price,
             "lowest_price" => $request->lowest_price,
             "accept" => $request->accept,
@@ -63,11 +64,11 @@ class ApiController extends Controller
             "property" => $request->property,
             "duration" => $request->duration,
             'range_days' => $request->range_days,
-            "user" => null,
             "features" => $request->features ?? [], // make sure features is defined
             "subscribers" => $subscribers, // make sure $subscribers is defined
 
         ];
+        // return $this->Response($filters,"af",201);
         $services = $this->propertiesServices->getProperties($filters);
 
 
@@ -90,23 +91,13 @@ class ApiController extends Controller
             ],
         ];
 
-        if ($request->user() && $request->user()->power == 'provider') {
-            $earnings = Earning::where("user_id", $request->user()->id)->where("is_cancelled", 0)->get();
-            $user_earning = $earnings->sum('provider_earning');
-
-            $report = [
-                "total_earnings" => $user_earning,
-                "total_booking" => Booking::where("provider_id", $request->user()->id)->count(),
-                "total_services" => Service::where("user_id", $request->user()->id)->count(),
-            ];
-            $data['report'] = $report;
-        }
+ 
 
         return $this->Response($data, "Data", 201);
     }
     public function home(Request $request){
 
-        $this->propertiesServices->apply_event_days();
+        // $this->propertiesServices->apply_event_days();
 
         $categories = Cache::rememberForever('categories', function () {
             return Categories::all();

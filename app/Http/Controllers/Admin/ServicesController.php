@@ -98,6 +98,7 @@ class ServicesController extends Controller
     }
     public function store(Request $request)
     {
+        // return $request;
 
         $request->validate(
             [
@@ -155,7 +156,7 @@ class ServicesController extends Controller
         $document = "2" . time() . str_replace(" ", "_", $request->document->getClientOriginalName());
         $request->document->move(public_path("files/"), $document);
 
-
+        //  ($request, $image, $document, $days, $provider_id )
         $service = $this->propertiesServices->createService($request,$image,$document,$days,$request->provider_id);
         
         if ($request->has('event_days') && count(json_decode($request->event_days)) > 0 && $request->event_day_price > 0)

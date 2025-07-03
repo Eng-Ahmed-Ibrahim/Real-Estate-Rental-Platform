@@ -46,6 +46,8 @@ class BookingServices
         return $booking;
     }
 
+
+
     public function check_if_dates_are_booked($service_id, $start_at, $end_at, $booking_id)
     {
         $startDate = $start_at ? Carbon::parse($start_at)->format('Y-m-d') : null;

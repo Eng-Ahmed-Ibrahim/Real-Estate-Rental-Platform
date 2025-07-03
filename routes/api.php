@@ -58,7 +58,9 @@ Route::post("/resend-otp", [OtpController::class, 'resend_otp']);
 
 Route::group(['middleware' => ['custom-auth','lang_apis']], function () {
         Route::post('/support', [SupportController::class, 'store']);
-    Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::get('/profile', [ProfileController::class, 'profile']);
+
 
 });
 Route::group(['middleware' => ['custom-auth','lang_apis', 'checkIfBlocked']], function () {
@@ -91,7 +93,6 @@ Route::group(['middleware' => ['custom-auth','lang_apis', 'checkIfBlocked']], fu
     Route::get('/notifications-count', [NotificationController::class, 'num_un_seen_notification']);
 
 
-    Route::get('/profile', [ProfileController::class, 'profile']);
     Route::post('/update-profile', [ProfileController::class, 'update_profile']);
     Route::post('/delete-image', [ProfileController::class, 'delete_image']);
 

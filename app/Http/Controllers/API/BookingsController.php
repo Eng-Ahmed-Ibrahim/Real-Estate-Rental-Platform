@@ -285,12 +285,12 @@ class BookingsController extends Controller
 
         $service = Service::find($request->service_id);
         if (!$service)
-            return $this->Response(null, __('messages.Not_found'), 404);
+            return $this->Response(__('messages.Not_found'), __('messages.Not_found'), 404);
 
         $startAt = Carbon::parse($request->start_at);
         $today = Carbon::today();
         if ($startAt->lt($today)) {
-            return response()->json(['error' => __('messages.Booking_future')], 400);
+            return $this->Response(__('messages.Booking_future'),__('messages.Booking_future'),422);
         }
 
         if ($request->end_at < $request->start_at)
@@ -469,18 +469,18 @@ class BookingsController extends Controller
         if ($validator->fails())
             return $this->Response($validator->errors(), "Data Not Valid", 422);
 
-        $booking = Booking::where("id", $request->booking_id)->where("provider_id", $request->user()->id)->first();
+        $booking = Booking::where("id", $request->booking_id)->first();
         if (!$booking)
             return $this->Response(null, "Not Allowed", 403);
         $start = Carbon::parse($booking->start_at)->format('m/d/Y');
         $end = Carbon::parse($booking->end_at)->format('m/d/Y');
-        if ($request->booking_status == 4) {
+        if ($request->status == 4) {
             $booking->update([
                 "booking_status_id" => 4,
             ]);
-            return $this->Response($booking, "Updated Successfully", 201);
+            return $this->Response( "Updated Successfully", "Updated Successfully", 201);
         }
-        if ($request->booking_status == 3) {
+        if ($request->status == 3) {
             $overlapExists = Booking::where('id', '!=', $booking->id)
                 ->where('service_id', $booking->service_id)
                 ->where('booking_status_id', 3)
@@ -515,11 +515,13 @@ class BookingsController extends Controller
             "payment_plan" => $request->payment_plan,
             "down_payment" => $down_payment,
         ]);
-        $key = match ($booking->booking_status_id) {
+        $key = match ($request->status) {
             1 => 'status_pending',
             2 => 'status_in_process',
             3 => 'status_approved',
-            default => 'status_rejected',
+            4 => 'status_rejected',
+            default => 'status_unknown', // أو أي قيمة افتراضية تعبر عن حالة غير معروفة
+
         };
 
         $booking_status_en = __("messages.$key", [], 'en');
@@ -566,10 +568,10 @@ class BookingsController extends Controller
             return $this->Response(null, "Not Allowed", 403);
 
         if ($booking->payment_status_id == 3) {
-            return $this->Response(null, "Payment already Approved ", 401);
+            return $this->Response(null, "Payment already Approved ", 422);
         }
         if ($booking->booking_status_id == 5) {
-            return $this->Response(null, "Booking already cancelled", 401);
+            return $this->Response(null, "Booking already cancelled", 422);
         }
 
         $check_is_booked = Helpers::check_if_dates_are_booked($booking->service_id, $booking->start_at, $booking->end_at, $booking->id);
@@ -581,7 +583,7 @@ class BookingsController extends Controller
         if (($request->status == 3  || $booking->booking_status_id == 4)) {
             $service = $booking->service;
             if (!$service) {
-                return $this->Response(null, "service not found", 401);
+                return $this->Response(null, "service not found", 422);
             }
             $booking->update([
                 "payment_status_id" => $booking->payment_plan == 'full' ? 3 : ($booking->down_paid == 0 ? 4 : 3), //paid
@@ -691,10 +693,10 @@ class BookingsController extends Controller
                 return $this->Response(null, "Not Allowed", 403);
             }
             if ($booking->booking_status_id == 5) {
-                return $this->Response(null, "Booking already cancelled", 401);
+                return $this->Response(null, "Booking already cancelled", 422);
             }
             if ($booking->payment_status_id == 3) {
-                return $this->Response(null, "Payment already Approved ", 401);
+                return $this->Response(null, "Payment already Approved ", 422);
             }
 
             $check_is_booked = Helpers::check_if_dates_are_booked($booking->service_id, $booking->start_at, $booking->end_at, $booking->id);
@@ -774,7 +776,7 @@ class BookingsController extends Controller
 
                 return $this->Response($booking, "Uploaded Successfully", 201);
             } else {
-                return $this->Response(null, "The owner Not Approved yet", 401);
+                return $this->Response(null, "The owner Not Approved yet", 422);
             }
         } catch (\Exception $e) {
             // Rollback the transaction if any exception occurs
@@ -812,10 +814,10 @@ class BookingsController extends Controller
                 return $this->Response(null, "Not Allowed", 403);
             }
             if ($booking->payment_status_id == 3) {
-                return $this->Response(null, "Payment already Approved ", 401);
+                return $this->Response(null, "Payment already Approved ", 422);
             }
             if ($booking->booking_status_id == 5) {
-                return $this->Response(null, "Booking already cancelled", 401);
+                return $this->Response(null, "Booking already cancelled", 422);
             }
 
             $check_is_booked = Helpers::check_if_dates_are_booked($booking->service_id, $booking->start_at, $booking->end_at, $booking->id);
@@ -969,7 +971,7 @@ class BookingsController extends Controller
 
                 return $this->Response($booking, "Paid Successfully", 201);
             } else {
-                return $this->Response(null, "The owner has not approved yet", 401);
+                return $this->Response(null, "The owner has not approved yet", 422);
             }
         } catch (\Exception $e) {
             // Rollback the transaction if any exception occurs
@@ -1147,7 +1149,7 @@ class BookingsController extends Controller
             return $this->Response($validator->errors(), "Data Not Valid", 422);
         $booking = Booking::where("id", $request->booking_id)->with(['customer'])->first();
         if ($booking->booking_status_id == 5) {
-            return $this->Response(null, __('messages.Already_cancelled'), 401);
+            return $this->Response(null, __('messages.Already_cancelled'), 422);
         }
         if ($booking->booking_status_id == 1) {
             $booking->update([
@@ -1203,15 +1205,15 @@ class BookingsController extends Controller
                     $earning->update([
                         "is_cancelled" => true,
                     ]);
-                Helpers::add_days_after_cancel_request($booking->id);
-            }
-            $booking->update([
-                'booking_status_id' => 5,
-            ]);
-
-            return $this->Response(null, $message, 201);
+                    Helpers::add_days_after_cancel_request($booking->id);
+                }
+                $booking->update([
+                    'booking_status_id' => 5,
+                ]);
+    
+                return $this->Response(null, __('messages.Cancelled_b_successfully'), 201);
         } else {
-            return $this->Response(null, __('messages.Not_allowed_to_cancel_booking'), 401);
+            return $this->Response(null, __('messages.Not_allowed_to_cancel_booking'), 422);
         }
     }
 }

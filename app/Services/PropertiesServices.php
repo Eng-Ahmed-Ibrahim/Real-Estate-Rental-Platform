@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
 use App\CPU\Helpers;
 use App\Models\Service;
 use App\Models\Setting;
@@ -19,14 +20,19 @@ class PropertiesServices
         $services = [];
         foreach ($data as $service) {
 
+            $service = $this->remove_old_days($service);
 
             $check_futures_days = $this->check_futures_dates($filters, $service->days);
             if (! $check_futures_days)
                 continue;
+
             $serviceFeatureIds = array_map('intval', $service->features->pluck('feature_id')->toArray()); // Convert to integers
             if (! empty(array_diff($requiredFeatures, $serviceFeatureIds)))
                 continue;
 
+                $averageRating=0;
+                $booking_count=0;
+                
             if ($service->user->blocked == 0) {
                 $distance = Helpers::distance_between_two_locations([
                     "user_lat" => $filters['lat'],
@@ -48,8 +54,8 @@ class PropertiesServices
                     $booking_count = 0;
                     if ($filters['user'])
                         $booking_count = $filters['user']->power == 'provider' ?  $service->booking_count : 0;
-                    $services[] = $this->formatService($service, $check, $distance, $averageRating, $booking_count);
                 }
+                $services[] = $this->formatService($service, $check, $distance, $averageRating, $booking_count);
             }
         }
         return $services;
@@ -165,7 +171,7 @@ class PropertiesServices
                     } catch (\Exception $e) {
                     }
                 }
-            }            
+            }
             $data = $data->filter(function ($service) use ($parsedRanges) {
                 $days = collect(json_decode($service->days ?? '[]'))
                     ->map(function ($dateString) {
@@ -219,6 +225,33 @@ class PropertiesServices
 
         return $data;
     }
+
+    private function remove_old_days($service)
+    {
+        $days = json_decode($service->days, true);
+
+        if (!empty($days)) {
+            $today = Carbon::today();
+
+            $filteredDays = array_filter($days, function ($day) use ($today) {
+                $date = Carbon::createFromFormat('m/d/Y h:i A', $day);
+                return $date->greaterThanOrEqualTo($today);
+            });
+
+            $filteredDays = array_values($filteredDays); // إعادة الفهرسة
+
+            if (count($filteredDays) !== count($days)) {
+                $service->days = json_encode($filteredDays); // ← حفظ كـ JSON string
+                $service->save();
+            }
+
+            // دايمًا ارجعه كـ string زي الأصل
+            $service->days = json_encode($filteredDays);
+        }
+
+        return $service;
+    }
+
     private function formatService($service, $check, $distance, $averageRating, $booking_count)
     {
         return [

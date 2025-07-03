@@ -316,7 +316,7 @@ return [
         'fcm_token' => 'رمز FCM',
     ],
     "Incorrect_phone_or_password" => "رقم التلفون أو كلمة المرور غير صحيحة",
-    "Blocked_user" => "تم حذف حسابك  ",
+    "Blocked_user" => "تم حظر حسابك أو حذفه. تواصل مع الدعم الفني. ",
     "Service_not_found" => "العقار غير موجود",
     "Days_not_Avaliable" => "الأيام غير متاحة، يرجى التحقق",
     'Terms_and_conditions' => 'الشروط والأحكام',
